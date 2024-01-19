@@ -1,8 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hepompid <hepompid@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/19 09:37:03 by hepompid          #+#    #+#             */
+/*   Updated: 2024/01/19 09:39:30 by hepompid         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#include <stdio.h>
+#include "../include/cub3d.h"
 
-int main()
+int main(int argc, char **argv)
 {
-	printf("compiled\n");
+	(void)argc;
+	(void)argv;
+
+	printf("CACAAAAAAA\n");
 	return (0);
 }
