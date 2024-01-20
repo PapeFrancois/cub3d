@@ -1,22 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hepompid <hepompid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/19 09:37:03 by hepompid          #+#    #+#             */
-/*   Updated: 2024/01/20 11:00:45 by hepompid         ###   ########.fr       */
+/*   Created: 2023/01/07 10:05:34 by hepompid          #+#    #+#             */
+/*   Updated: 2024/01/20 11:02:29 by hepompid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3d.h"
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
 
-int main(int argc, char **argv)
-{
-	if (argc != 2)
-		return (0);
-	if (parsing(argv[1]) == ERROR)
-		return (1);
-	return (0);
-}
+# include <stdlib.h>
+# include <unistd.h>
+# include "../libft/libft.h"
+
+char	*get_next_line(int fd);
+char	*ft_strjoin_free(char const *s1, char const *s2);
+
+#endif

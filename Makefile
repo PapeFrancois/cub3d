@@ -2,7 +2,10 @@
 ###### SOURCES ######################################
 
 
-SRCS =			main.c
+SRCS =			main.c \
+				get_next_line.c \
+				get_next_line_utils.c \
+				parsing.c \
 
 
 ###### VARIABLES ####################################
@@ -12,7 +15,7 @@ CC = 			cc
 
 CFLAGS = 		-Wall -Wextra -Werror
 
-VPATH = 		src/:
+VPATH = 		src/:utils/get_next_line/:src/parsing/
 
 OBJ_DIR = 		obj_files
 
