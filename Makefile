@@ -6,6 +6,9 @@ SRCS =			main.c \
 				get_next_line.c \
 				get_next_line_utils.c \
 				parsing.c \
+				error.c \
+				file_decomposer.c \
+				free.c
 
 
 ###### VARIABLES ####################################
@@ -13,7 +16,7 @@ SRCS =			main.c \
 
 CC = 			cc
 
-CFLAGS = 		-Wall -Wextra -Werror
+CFLAGS = 		-Wall -Wextra -Werror -g3
 
 VPATH = 		src/:utils/get_next_line/:src/parsing/
 

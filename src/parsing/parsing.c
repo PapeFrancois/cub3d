@@ -6,7 +6,7 @@
 /*   By: hepompid <hepompid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 10:18:28 by hepompid          #+#    #+#             */
-/*   Updated: 2024/01/29 13:53:15 by hepompid         ###   ########.fr       */
+/*   Updated: 2024/01/31 01:00:06 by hepompid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static int	extension_checker(char *arg)
 	while (arg[i] && arg[i + 1])
 		i++;
 	if (arg[i] != 'b' && arg[i - 1] != 'u' && arg[i - 2] != 'c'
-			&& arg[i - 3] != '.')
+		&& arg[i - 3] != '.')
 	{
 		printf("Error\nThe file must have a .cub extention\n");
 		return (ERROR);
@@ -28,7 +28,7 @@ static int	extension_checker(char *arg)
 	return (OK);
 }
 
-static int	file_exist_checker(char *arg, int *fd)
+static int	file_opener(char *arg, int *fd)
 {
 	*fd = open(arg, O_RDONLY);
 	if (*fd == -1)
@@ -40,19 +40,88 @@ static int	file_exist_checker(char *arg, int *fd)
 	return (OK);
 }
 
+static int	line_counter(int fd)
+{
+	char	buffer;
+	int		n_of_lines;
+
+	n_of_lines = 0;
+	while (read(fd, &buffer, 1))
+	{
+		if (n_of_lines == 0)
+			n_of_lines = 1;
+		if (buffer == '\n')
+			n_of_lines++;
+	}
+	close(fd);
+	return (n_of_lines);
+}
+
+static int	table_filler(char ***file, int fd, int n_of_lines)
+{
+	char	*str;
+	int		i;
+
+	i = 0;
+	str = get_next_line(fd);
+	while (str)
+	{
+		printf("%d str = %sa", i, str);
+		(*file)[i] = str;
+		i++;
+		str = get_next_line(fd);
+	}
+	if (!str && i < n_of_lines)
+	{
+		malloc_error(*file, i - 1);
+		printf("Error\nA malloc failed\n");
+		return (ERROR);
+	}
+	(*file)[i] = NULL;
+	return (OK);
+}
+
+void	preli_printer(t_preli elements)
+{
+	int	i;
+	
+	printf("NO = %sSO = %sWE = %sEA = %sF = %sC = %s", 
+		elements.NO, elements. SO, elements.WE, elements.EA, elements.F, elements.C);
+	i = 0;
+	while (elements.map[i])
+	{
+		printf("%s", elements.map[i]);
+		i++;
+	}
+	printf("\n");
+}
+
 int	parsing(char *arg)
 {
-	int			fd;
-	t_elements	elements;
-	
-	if (extension_checker(arg) == ERROR || file_exist_checker(arg, &fd) == ERROR)
+	int		fd;
+	t_preli	elements;
+	int		n_of_lines;
+	char	**file;
+
+	if (extension_checker(arg) == ERROR || file_opener(arg, &fd) == ERROR)
 		return (ERROR);
-	elements.NO = NULL;
-	elements.SO = NULL;
-	elements.WE = NULL;
-	elements.EA = NULL;
-	elements.C = NULL;
-	elements.F = NULL;
-	elements.map = NULL;
+	n_of_lines = line_counter(fd);
+	if (file_opener(arg, &fd) == ERROR)
+		return (ERROR);
+	file = malloc((n_of_lines + 1) * sizeof(char *));
+	if (!file || table_filler(&file, fd, n_of_lines) == ERROR)
+	{
+		close(fd);
+		return (ERROR);
+	}
+	close(fd);
+	if (file_decomposer(&elements, n_of_lines, file) == ERROR)
+	{
+		free_table(file);
+		return (ERROR);
+	}
+	preli_printer(elements);
+	free(elements.map);
+	free_table(file);
 	return (OK);
 }
