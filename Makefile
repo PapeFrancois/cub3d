@@ -2,7 +2,9 @@
 ###### SOURCES ######################################
 
 
-SRCS =			main.c
+SRCS =			main.c \
+				graphic.c \
+				free.c
 
 
 ###### VARIABLES ####################################
@@ -10,9 +12,9 @@ SRCS =			main.c
 
 CC = 			cc
 
-CFLAGS = 		-Wall -Wextra -Werror
+CFLAGS = 		-Wall -Wextra -Werror -g3
 
-VPATH = 		src/:
+VPATH = 		src/:src/graphic/
 
 OBJ_DIR = 		obj_files
 
