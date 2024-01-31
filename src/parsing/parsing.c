@@ -6,7 +6,7 @@
 /*   By: hepompid <hepompid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 10:18:28 by hepompid          #+#    #+#             */
-/*   Updated: 2024/01/31 11:19:26 by hepompid         ###   ########.fr       */
+/*   Updated: 2024/01/31 14:20:49 by hepompid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,10 +97,10 @@ void	preli_printer(t_preli elements)
 
 int	parsing(char *arg)
 {
-	int		fd;
-	t_preli	elements;
-	int		n_of_lines;
-	char	**file;
+	int			fd;
+	int			n_of_lines;
+	char		**file;
+	t_elements	elements;
 
 	if (extension_checker(arg) == ERROR || file_opener(arg, &fd) == ERROR)
 		return (ERROR);
@@ -114,13 +114,12 @@ int	parsing(char *arg)
 		return (ERROR);
 	}
 	close(fd);
-	if (file_decomposer(&elements, n_of_lines, file) == ERROR)
+	if (element_manager(file, n_of_lines, &elements) == ERROR)
 	{
 		free_table(file);
 		return (ERROR);
 	}
-	preli_printer(elements);
-	free(elements.map);
 	free_table(file);
+	free_table(elements.map);
 	return (OK);
 }

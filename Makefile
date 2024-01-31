@@ -8,7 +8,9 @@ SRCS =			main.c \
 				parsing.c \
 				error.c \
 				file_decomposer.c \
-				free.c
+				free.c \
+				element_manager.c \
+				map.c
 
 
 ###### VARIABLES ####################################
