@@ -6,7 +6,7 @@
 /*   By: hepompid <hepompid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 13:35:33 by hepompid          #+#    #+#             */
-/*   Updated: 2024/01/31 13:47:24 by hepompid         ###   ########.fr       */
+/*   Updated: 2024/01/31 18:34:32 by hepompid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,6 @@ int		file_decomposer(t_preli *elements, int n_of_lines, char **file);
 void	free_table(char **table);
 int		map_manager(char ***final_map, char **temp_map);
 int		element_manager(char **file, int n_of_lines, t_elements *elements);
+void	free_elements(t_elements elements);
 
 #endif

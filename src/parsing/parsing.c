@@ -6,7 +6,7 @@
 /*   By: hepompid <hepompid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 10:18:28 by hepompid          #+#    #+#             */
-/*   Updated: 2024/01/31 14:20:49 by hepompid         ###   ########.fr       */
+/*   Updated: 2024/01/31 18:43:47 by hepompid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,9 +117,18 @@ int	parsing(char *arg)
 	if (element_manager(file, n_of_lines, &elements) == ERROR)
 	{
 		free_table(file);
+		free_elements(elements);
 		return (ERROR);
 	}
 	free_table(file);
-	free_table(elements.map);
+	free_elements(elements);
+
+	// int i = 0;
+	// while (elements.map[i])
+	// {
+	// 	printf("%s\n", elements.map[i]);
+	// 	i++;
+	// }
+	// free_table(elements.map);
 	return (OK);
 }
