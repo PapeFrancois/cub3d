@@ -6,7 +6,7 @@
 /*   By: hepompid <hepompid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 10:18:28 by hepompid          #+#    #+#             */
-/*   Updated: 2024/01/31 01:00:06 by hepompid         ###   ########.fr       */
+/*   Updated: 2024/01/31 11:19:26 by hepompid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,12 +66,11 @@ static int	table_filler(char ***file, int fd, int n_of_lines)
 	str = get_next_line(fd);
 	while (str)
 	{
-		printf("%d str = %sa", i, str);
 		(*file)[i] = str;
 		i++;
 		str = get_next_line(fd);
 	}
-	if (!str && i < n_of_lines)
+	if (!str && i < n_of_lines - 1)
 	{
 		malloc_error(*file, i - 1);
 		printf("Error\nA malloc failed\n");
