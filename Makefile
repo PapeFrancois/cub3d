@@ -10,7 +10,8 @@ SRCS =			main.c \
 				file_decomposer.c \
 				free.c \
 				element_manager.c \
-				map.c
+				map.c \
+				colors.c
 
 
 ###### VARIABLES ####################################

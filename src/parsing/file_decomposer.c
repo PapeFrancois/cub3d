@@ -6,7 +6,7 @@
 /*   By: hepompid <hepompid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 14:57:05 by hepompid          #+#    #+#             */
-/*   Updated: 2024/01/31 01:00:27 by hepompid         ###   ########.fr       */
+/*   Updated: 2024/01/31 22:13:28 by hepompid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	element_searcher(char *line, t_preli **elements)
 int	map_searcher(char **file, int i, char ***map, int n_of_lines)
 {
 	int	j;
-	
+
 	while (file[++i])
 	{
 		j = -1;
@@ -54,7 +54,7 @@ int	map_searcher(char **file, int i, char ***map, int n_of_lines)
 				break ;
 		}
 		if (file[i][j])
-				break ;
+			break ;
 	}
 	if (!file[i])
 	{

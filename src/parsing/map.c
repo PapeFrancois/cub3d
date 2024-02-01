@@ -6,7 +6,7 @@
 /*   By: hepompid <hepompid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 13:14:09 by hepompid          #+#    #+#             */
-/*   Updated: 2024/01/31 14:36:02 by hepompid         ###   ########.fr       */
+/*   Updated: 2024/01/31 22:13:36 by hepompid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ char	*line_filler(char *final_line, char *temp_line, int len_max)
 int	map_manager(char ***final_map, char **temp_map)
 {
 	int	i;
-	
+
 	*final_map = malloc((map_size_finder(temp_map) + 1) * sizeof(char *));
 	if (!(*final_map))
 	{

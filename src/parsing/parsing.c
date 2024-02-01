@@ -6,7 +6,7 @@
 /*   By: hepompid <hepompid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 10:18:28 by hepompid          #+#    #+#             */
-/*   Updated: 2024/01/31 18:43:47 by hepompid         ###   ########.fr       */
+/*   Updated: 2024/01/31 22:12:38 by hepompid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,21 +80,6 @@ static int	table_filler(char ***file, int fd, int n_of_lines)
 	return (OK);
 }
 
-void	preli_printer(t_preli elements)
-{
-	int	i;
-	
-	printf("NO = %sSO = %sWE = %sEA = %sF = %sC = %s", 
-		elements.NO, elements. SO, elements.WE, elements.EA, elements.F, elements.C);
-	i = 0;
-	while (elements.map[i])
-	{
-		printf("%s", elements.map[i]);
-		i++;
-	}
-	printf("\n");
-}
-
 int	parsing(char *arg)
 {
 	int			fd;
@@ -122,13 +107,20 @@ int	parsing(char *arg)
 	}
 	free_table(file);
 	free_elements(elements);
-
-	// int i = 0;
-	// while (elements.map[i])
-	// {
-	// 	printf("%s\n", elements.map[i]);
-	// 	i++;
-	// }
-	// free_table(elements.map);
 	return (OK);
 }
+
+// void	preli_printer(t_preli elements)
+// {
+// 	int	i;
+	
+// 	printf("NO = %sSO = %sWE = %sEA = %sF = %sC = %s", 
+// 		elements.NO, elements. SO, elements.WE, elements.EA, elements.F, elements.C);
+// 	i = 0;
+// 	while (elements.map[i])
+// 	{
+// 		printf("%s", elements.map[i]);
+// 		i++;
+// 	}
+// 	printf("\n");
+// }

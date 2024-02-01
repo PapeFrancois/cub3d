@@ -6,7 +6,7 @@
 /*   By: hepompid <hepompid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 11:33:39 by hepompid          #+#    #+#             */
-/*   Updated: 2024/01/31 18:35:17 by hepompid         ###   ########.fr       */
+/*   Updated: 2024/02/01 22:04:35 by hepompid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	data_assigner(char ***texture_path, char *texture_line, int start, int end)
 {
 	int	i;
-	
+
 	**texture_path = NULL;
 	**texture_path = malloc((end - start + 2) * sizeof(char));
 	if (!(**texture_path))
@@ -59,13 +59,35 @@ int	data_catcher(char **texture_path, char *texture_line)
 	return (OK);
 }
 
+int	texture_checker(t_elements *elements)
+{
+	int	fd;
+
+	fd = open(elements->NO, O_RDONLY);
+	if (fd == -1)
+		return (ERROR);
+	close(fd);
+	fd = open(elements->SO, O_RDONLY);
+	if (fd == -1)
+		return (ERROR);
+	close(fd);
+	fd = open(elements->WE, O_RDONLY);
+	if (fd == -1)
+		return (ERROR);
+	close(fd);
+	fd = open(elements->EA, O_RDONLY);
+	if (fd == -1)
+		return (ERROR);
+	close(fd);
+	return (OK);
+}
+
 int	element_manager(char **file, int n_of_lines, t_elements *elements)
 {
 	t_preli		temp_elements;
-	
+
 	if (file_decomposer(&temp_elements, n_of_lines, file) == ERROR)
 		return (ERROR);
-	elements->map = NULL;
 	if (map_manager(&elements->map, temp_elements.map) == ERROR)
 	{
 		free_table(temp_elements.map);
@@ -79,6 +101,12 @@ int	element_manager(char **file, int n_of_lines, t_elements *elements)
 	if (data_catcher(&elements->WE, temp_elements.WE) == ERROR)
 		return (ERROR);
 	if (data_catcher(&elements->EA, temp_elements.EA) == ERROR)
+		return (ERROR);
+	if (colors_manager(&elements->F, temp_elements.F) == ERROR)
+		return (ERROR);
+	if (colors_manager(&elements->C, temp_elements.C) == ERROR)
+		return (ERROR);
+	if (texture_checker(elements) == ERROR)
 		return (ERROR);
 	return (OK);
 }
