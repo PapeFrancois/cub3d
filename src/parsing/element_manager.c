@@ -6,13 +6,13 @@
 /*   By: hepompid <hepompid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 11:33:39 by hepompid          #+#    #+#             */
-/*   Updated: 2024/02/01 22:04:35 by hepompid         ###   ########.fr       */
+/*   Updated: 2024/02/02 11:23:30 by hepompid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-int	data_assigner(char ***texture_path, char *texture_line, int start, int end)
+int	texture_assigner(char ***texture_path, char *texture_line, int start, int end)
 {
 	int	i;
 
@@ -34,7 +34,7 @@ int	data_assigner(char ***texture_path, char *texture_line, int start, int end)
 	return (OK);
 }
 
-int	data_catcher(char **texture_path, char *texture_line)
+int	texture_manager(char **texture_path, char *texture_line)
 {
 	int	i;
 	int	j;
@@ -54,7 +54,7 @@ int	data_catcher(char **texture_path, char *texture_line)
 	j = ft_strlen(texture_line) - 1;
 	while (j >= 0 && (texture_line[j] == ' ' || texture_line[j] == '\n'))
 		j--;
-	if (data_assigner(&texture_path, texture_line, i, j) == ERROR)
+	if (texture_assigner(&texture_path, texture_line, i, j) == ERROR)
 		return (ERROR);
 	return (OK);
 }
@@ -94,19 +94,21 @@ int	element_manager(char **file, int n_of_lines, t_elements *elements)
 		return (ERROR);
 	}
 	free(temp_elements.map);
-	if (data_catcher(&elements->NO, temp_elements.NO) == ERROR)
+	if (texture_manager(&elements->NO, temp_elements.NO) == ERROR)
 		return (ERROR);
-	if (data_catcher(&elements->SO, temp_elements.SO) == ERROR)
+	if (texture_manager(&elements->SO, temp_elements.SO) == ERROR)
 		return (ERROR);
-	if (data_catcher(&elements->WE, temp_elements.WE) == ERROR)
+	if (texture_manager(&elements->WE, temp_elements.WE) == ERROR)
 		return (ERROR);
-	if (data_catcher(&elements->EA, temp_elements.EA) == ERROR)
+	if (texture_manager(&elements->EA, temp_elements.EA) == ERROR)
 		return (ERROR);
 	if (colors_manager(&elements->F, temp_elements.F) == ERROR)
 		return (ERROR);
 	if (colors_manager(&elements->C, temp_elements.C) == ERROR)
 		return (ERROR);
 	if (texture_checker(elements) == ERROR)
+		return (ERROR);
+	if (map_checker(elements->map) == ERROR)
 		return (ERROR);
 	return (OK);
 }

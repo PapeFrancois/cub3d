@@ -6,12 +6,12 @@ SRCS =			main.c \
 				get_next_line.c \
 				get_next_line_utils.c \
 				parsing.c \
-				error.c \
 				file_decomposer.c \
 				free.c \
 				element_manager.c \
 				map.c \
-				colors.c
+				colors.c \
+				map_checker.c
 
 
 ###### VARIABLES ####################################

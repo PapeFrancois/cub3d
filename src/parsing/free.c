@@ -6,11 +6,21 @@
 /*   By: hepompid <hepompid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 22:11:08 by hepompid          #+#    #+#             */
-/*   Updated: 2024/01/31 18:34:21 by hepompid         ###   ########.fr       */
+/*   Updated: 2024/02/02 11:21:00 by hepompid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
+
+void	malloc_error(char **table, int i)
+{
+	while (i >= 0)
+	{
+		free(table[i]);
+		i--;
+	}
+	free(table);
+}
 
 void	free_elements(t_elements elements)
 {

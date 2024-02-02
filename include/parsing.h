@@ -6,7 +6,7 @@
 /*   By: hepompid <hepompid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 13:35:33 by hepompid          #+#    #+#             */
-/*   Updated: 2024/02/01 21:49:27 by hepompid         ###   ########.fr       */
+/*   Updated: 2024/02/02 11:22:38 by hepompid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,6 @@ int		map_manager(char ***final_map, char **temp_map);
 int		element_manager(char **file, int n_of_lines, t_elements *elements);
 void	free_elements(t_elements elements);
 int		colors_manager(long int *color, char *color_line);
+int		map_checker(char **map);
 
 #endif
