@@ -1,5 +1,6 @@
 #include "../../include/graphic.h"
 
+
 int	destroy_mlx(t_mlx *display)
 {
 	mlx_destroy_window(display->mlx, display->win);
@@ -9,181 +10,15 @@ int	destroy_mlx(t_mlx *display)
 	exit(0);
 }
 
-void draw_2d_player(t_game *game)
-{
-	for (int i = -3; i < 4; i++)
-	{
-		for (int j = -3; j < 4; j++)
-		{
-			mlx_pixel_put(game->display->mlx, game->display->win, game->x + i, game->y + j, 0x00FF0000);
-		}
-	}
-}
-
-void	draw_2d_map(t_game *game)
-{
-	int		i;
-	int		j;
-	int		k;
-	int		l;
-	int		size;
-
-	i = 0;
-	size = MAP_SIZE;
-	while (game->display->map[i])
-	{
-		j = 0;
-		while (game->display->map[i][j])
-		{
-			if (game->display->map[i][j] == '1')
-			{
-				k = 0;
-				while (k < size)
-				{
-					l = 0;
-					while (l < size)
-					{
-						mlx_pixel_put(game->display->mlx, game->display->win, i * MAP_SIZE + l, j * MAP_SIZE + k, 0x00FFFFFF);
-						l++;
-					}
-					k++;
-				}
-			}
-			j++;
-		}
-		i++;
-	}
-
-}
-
-void	display_2d_ray(t_game *game)
-{
-	double rayX = game->x;
-	double rayY = game->y;
-	while (game->display->map[(int)(rayX / MAP_SIZE)][(int)(rayY / MAP_SIZE)] == '0')
-	{
-		// printf("rayX / map_size : %i    rayY / map_size : %i\n", (int)(rayX / MAP_SIZE), (int)(rayY / MAP_SIZE));
-		rayX += game->dirX;
-		rayY += game->dirY;
-		mlx_pixel_put(game->display->mlx, game->display->win, rayX, rayY, 0x00FFF000);
-		// printf("rayX: %f, rayY: %f\n", rayX, rayY);
-	}
-}
-
-void	refresh_2d_screen(t_game *game)
-{
-	mlx_clear_window(game->display->mlx, game->display->win);
-	draw_2d_map(game);
-	display_2d_ray(game);
-	draw_2d_player(game);
-
-}
-
-void	display_3d_map(t_game *game)
-{
-	int i;
-	int j;
-	int	k;
-	int l;
-	double rayX;
-	double rayY;
-
-	(void) i;
-	(void) j;
-	(void) k;
-	(void) l;
-	(void) rayX;
-	(void) rayY;
-	rayX = game->x;
-	rayY = game->y;
-	i = 0;
-
-	
-	ray_3d_display(game, rayX, rayY);
-	while (game->display->map[(int)(rayX / MAP_SIZE)][(int)(rayY / MAP_SIZE)] == '0')
-	{
-		rayX += game->dirX;
-		rayY += game->dirY;
-		// mlx_pixel_put(game->display->mlx, game->display->win, rayX, rayY, 0x00FFF000);
-		
-		i++;
-	}
-
-	l = i;
-	while (i > -l)
-	{
-		j = l;
-		while (j > -l)
-		{
-			// mlx_pixel_put(game->display->mlx, game->display->win, 640 + i, 450 + j, 0x00FFFFFF);
-			j--;
-		}
-		i--;
-	}
-}
-
-void	refresh_3d_screen(t_game *game)
-{
-	mlx_clear_window(game->display->mlx, game->display->win);
-
-	display_3d_map(game);
-
-}
-
 void	refresh_screen(t_game *game)
 {
+	mlx_clear_window(game->display->mlx, game->display->win);
+	display_deformed_img(game->display, game->display->wall, 0, 0);
+	return ;
 	if (game->display_mode == 2)
 		refresh_2d_screen(game);
 	else if (game->display_mode == 3)
 		refresh_3d_screen(game);
-}
-
-void	move(int x, int y, t_game *game)
-{
-	double oldX;
-	double oldY;
-	(void) x;
-	(void) y;
-	(void) game;
-	if (y == 0)
-		return ;
-	oldX = game->x;
-	oldY = game->y;
-	game->x += game->dirX * y;
-	game->y += game->dirY * y;
-	if (game->display->map[(int)(game->x / MAP_SIZE)][(int)(oldY / MAP_SIZE)] == '1')
-	{
-		game->x = oldX;
-	}
-	else if (game->display->map[(int)(oldX / MAP_SIZE)][(int)(game->y / MAP_SIZE)] == '1')
-	{
-		game->y = oldY;
-	}
-	refresh_screen(game);
-}
-
-void	rotate_matrix(double *x, double *y, double angle)
-{
-	double oldX = *x;
-	*x = *x * cos(angle) - *y * sin(angle);
-	*y = oldX * sin(angle) + *y * cos(angle);
-}
-
-void	rotate(double x, int y, t_game *game)
-{
-	(void) x;
-	(void) y;
-	if (x == 0)
-		return ;
-	// printf("x: %f, y: %d\n", x, y);
-	x /= 10;
-	// printf("game->dirX: %f, game->dirY: %f\n", game->dirX, game->dirY);
-	rotate_matrix(&game->dirX, &game->dirY, x);
-	// double oldPlaneX = game->planeX;
-	// game->planeX = game->planeX * cos(-x) - game->planeY * sin(-x);
-	// game->planeY = oldPlaneX * sin(-x) + game->planeY * cos(-x);
-	// printf("game->dirX: %f, game->dirY: %f\n", game->dirX, game->dirY);
-	refresh_screen(game);
 }
 
 int	key_hook(int keycode, t_game *game)
@@ -275,6 +110,10 @@ int	key_release_hook(int keycode, t_game *game)
 int	key_loop_hook(t_game *game)
 {
 	move(0, game->walking, game);
+
+	// static unsigned int i = 0;
+	// i++;
+	// printf("game->walking: %d\n", game->walking);
 	return (0);
 }
 
@@ -285,6 +124,7 @@ void	display()
 
 	display = init_mlx();
 	game = init_game(display);
+	init_images(game.display);
 	refresh_screen(&game);
 	mlx_loop_hook(display.mlx, key_loop_hook, &game);
 	mlx_hook(display.win, 17, 1L << 17, destroy_mlx, &game);

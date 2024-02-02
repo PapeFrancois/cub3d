@@ -4,7 +4,11 @@
 
 SRCS =			main.c \
 				graphic.c \
-				free.c
+				free.c \
+				2d_display.c \
+				3d_display.c \
+				deplacements.c \
+				image.c 
 
 
 ###### VARIABLES ####################################
