@@ -6,7 +6,7 @@
 /*   By: hepompid <hepompid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 10:58:27 by hepompid          #+#    #+#             */
-/*   Updated: 2024/02/02 17:21:32 by hepompid         ###   ########.fr       */
+/*   Updated: 2024/02/02 17:38:13 by hepompid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	lentgh_and_width_finder(int *length, int *width, char **map)
 		(*width)++;
 }
 
-int	walls_checker(int length, int width, char **map)
+int	walls_checker(int length, int width, char **map, char starting_point)
 {
 	int	i;
 	int	j;
@@ -46,7 +46,7 @@ int	walls_checker(int length, int width, char **map)
 		j = -1;
 		while (++j < width)
 		{
-			if (map[i][j] == '0')
+			if (map[i][j] == '0' || map[i][j] == starting_point)
 			{
 				if (i == 0 || (i > 0 && map[i - 1][j] == ' ' ))
 					return (err("The map has walls missing"));
@@ -83,8 +83,8 @@ int	map_checker(char **map)
 		}
 	}
 	if (starting_point == 0)
-		return (ERROR);
-	if (walls_checker(length, width, map) == ERROR)
+		return (err("No starting point"));
+	if (walls_checker(length, width, map, starting_point) == ERROR)
 		return (ERROR);
 	return (OK);
 }

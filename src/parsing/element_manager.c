@@ -6,7 +6,7 @@
 /*   By: hepompid <hepompid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 11:33:39 by hepompid          #+#    #+#             */
-/*   Updated: 2024/02/02 17:32:28 by hepompid         ###   ########.fr       */
+/*   Updated: 2024/02/02 17:45:22 by hepompid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ int	texture_assigner(char ***texture_path, char *texture_line, int start, int en
 {
 	int	i;
 
-	**texture_path = NULL;
 	**texture_path = malloc((end - start + 2) * sizeof(char));
 	if (!(**texture_path))
 	{

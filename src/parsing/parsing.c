@@ -6,7 +6,7 @@
 /*   By: hepompid <hepompid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 10:18:28 by hepompid          #+#    #+#             */
-/*   Updated: 2024/02/02 17:08:41 by hepompid         ###   ########.fr       */
+/*   Updated: 2024/02/02 17:46:21 by hepompid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,11 @@ int	parsing(char *arg)
 	char		**file;
 	t_elements	elements;
 
+	elements.NO = NULL;
+	elements.SO = NULL;
+	elements.WE = NULL;
+	elements.EA = NULL;
+	elements.map = NULL;
 	if (extension_checker(arg) == ERROR || file_opener(arg, &fd) == ERROR)
 		return (ERROR);
 	n_of_lines = line_counter(fd);

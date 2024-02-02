@@ -6,7 +6,7 @@
 /*   By: hepompid <hepompid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 18:45:29 by hepompid          #+#    #+#             */
-/*   Updated: 2024/02/02 17:25:40 by hepompid         ###   ########.fr       */
+/*   Updated: 2024/02/02 17:42:59 by hepompid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ int	color_splitter(char *color_line, int *end)
 		color_line[*end] = 0;
 		(*end)++;
 	}
+	while (color_line[*end] && color_line[*end] == ' ')
+		(*end)++;
 	return (ft_atoi(color_line + start));
 }
 

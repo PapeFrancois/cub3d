@@ -1,10 +1,17 @@
-NO include/parsing.h
+NO     include/parsing.h 
 SO include/parsing.h
 
+
+
 EA include/parsing.h
+
+
+
 WE include/parsing.h
 
 F 1,2,3
-C   64,5,6
+C   64,5,  65
 
+111
+101
 111
