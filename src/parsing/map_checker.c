@@ -6,7 +6,7 @@
 /*   By: hepompid <hepompid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 10:58:27 by hepompid          #+#    #+#             */
-/*   Updated: 2024/02/02 11:24:33 by hepompid         ###   ########.fr       */
+/*   Updated: 2024/02/02 17:21:32 by hepompid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,13 @@
 int	starting_point_finder(char *starting_point, char point)
 {
 	if (point != '0' && point != '1' && point != ' ' && *starting_point)
-		return (ERROR);
+		return (err("Bad map format\n"));
 	else if (point != '0' && point != '1' && point != ' ' && !(*starting_point))
 		*starting_point = point;
+	if (*starting_point && (*starting_point) != 'N' &&
+		(*starting_point) != 'S' && (*starting_point) == 'W' &&
+		(*starting_point) != 'E')
+		return (err("Bad starting position\n"));
 	return (OK);
 }
 
@@ -45,13 +49,13 @@ int	walls_checker(int length, int width, char **map)
 			if (map[i][j] == '0')
 			{
 				if (i == 0 || (i > 0 && map[i - 1][j] == ' ' ))
-					return (ERROR);
+					return (err("The map has walls missing"));
 				if (i == length - 1 || (i < length - 1 && map[i + 1][j] == ' '))
-					return (ERROR);
+					return (err("The map has walls missing"));
 				if (j == 0 || (j > 0 && map[i][j - 1] == ' '))
-					return (ERROR);
+					return (err("The map has walls missing"));
 				if (j == width - 1 || (i < width - 1 && map[i][j + 1] == ' '))
-					return (ERROR);
+					return (err("The map has walls missing"));
 			}
 		}
 	}

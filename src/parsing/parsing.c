@@ -6,7 +6,7 @@
 /*   By: hepompid <hepompid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 10:18:28 by hepompid          #+#    #+#             */
-/*   Updated: 2024/01/31 22:12:38 by hepompid         ###   ########.fr       */
+/*   Updated: 2024/02/02 17:08:41 by hepompid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,7 @@ static int	extension_checker(char *arg)
 		i++;
 	if (arg[i] != 'b' && arg[i - 1] != 'u' && arg[i - 2] != 'c'
 		&& arg[i - 3] != '.')
-	{
-		printf("Error\nThe file must have a .cub extention\n");
-		return (ERROR);
-	}
+		return (err("The file must have a .cub extention"));
 	return (OK);
 }
 
@@ -33,9 +30,8 @@ static int	file_opener(char *arg, int *fd)
 	*fd = open(arg, O_RDONLY);
 	if (*fd == -1)
 	{
-		printf("Error\nAn error occured whilst trying to open the file\n");
 		close(*fd);
-		return (ERROR);
+		return (err("The file failed to open"));
 	}
 	return (OK);
 }

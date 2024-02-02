@@ -11,7 +11,8 @@ SRCS =			main.c \
 				element_manager.c \
 				map.c \
 				colors.c \
-				map_checker.c
+				map_checker.c \
+				error.c
 
 
 ###### VARIABLES ####################################

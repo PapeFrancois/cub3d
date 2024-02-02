@@ -6,7 +6,7 @@
 /*   By: hepompid <hepompid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 11:33:39 by hepompid          #+#    #+#             */
-/*   Updated: 2024/02/02 11:23:30 by hepompid         ###   ########.fr       */
+/*   Updated: 2024/02/02 17:32:28 by hepompid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,7 @@ int	texture_manager(char **texture_path, char *texture_line)
 	while (texture_line[i] && (texture_line[i] == ' ' || texture_line[i] == '\n'))
 		i++;
 	if (!texture_line[i] || texture_line[i] == '\n')
-	{
-		printf("custom error message\n");
-		return (ERROR);
-	}
+		return (err("Texture linking error\n"));
 	j = ft_strlen(texture_line) - 1;
 	while (j >= 0 && (texture_line[j] == ' ' || texture_line[j] == '\n'))
 		j--;
@@ -65,19 +62,19 @@ int	texture_checker(t_elements *elements)
 
 	fd = open(elements->NO, O_RDONLY);
 	if (fd == -1)
-		return (ERROR);
+		return (err("Failed to open texture\n"));
 	close(fd);
 	fd = open(elements->SO, O_RDONLY);
 	if (fd == -1)
-		return (ERROR);
+		return (err("Failed to open texture\n"));
 	close(fd);
 	fd = open(elements->WE, O_RDONLY);
 	if (fd == -1)
-		return (ERROR);
+		return (err("Failed to open texture\n"));
 	close(fd);
 	fd = open(elements->EA, O_RDONLY);
 	if (fd == -1)
-		return (ERROR);
+		return (err("Failed to open texture\n"));
 	close(fd);
 	return (OK);
 }

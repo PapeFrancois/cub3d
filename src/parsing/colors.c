@@ -6,7 +6,7 @@
 /*   By: hepompid <hepompid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 18:45:29 by hepompid          #+#    #+#             */
-/*   Updated: 2024/02/01 21:59:58 by hepompid         ###   ########.fr       */
+/*   Updated: 2024/02/02 17:25:40 by hepompid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,7 @@ int	colors_manager(long int *color, char *color_line)
 	colors.BLUE = color_splitter(color_line, &i);
 	if (colors.RED < 0 || colors.RED > 255 || colors.GREEN < 0
 		|| colors.GREEN > 255 || colors.BLUE < 0 || colors.BLUE > 255)
-	{
-		printf("custom message color\n");
-		return (ERROR);
-	}
+		return (err("Color issue"));
 	*color = (colors.RED << 16) + (colors.GREEN << 8) + colors.BLUE;
 	return (OK);
 }

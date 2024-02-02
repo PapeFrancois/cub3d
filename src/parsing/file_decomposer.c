@@ -6,7 +6,7 @@
 /*   By: hepompid <hepompid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 14:57:05 by hepompid          #+#    #+#             */
-/*   Updated: 2024/01/31 22:13:28 by hepompid         ###   ########.fr       */
+/*   Updated: 2024/02/02 17:24:17 by hepompid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	element_searcher(char *line, t_preli **elements)
 	else if (!(**elements).C && line[i] == 'C')
 		(**elements).C = line;
 	else
-		return (ERROR);
+		return (err("Texture missing"));
 	if ((**elements).NO && (**elements).SO && (**elements).WE
 		&& (**elements).EA && (**elements).F && (**elements).C)
 		return (DONE);
@@ -57,10 +57,7 @@ int	map_searcher(char **file, int i, char ***map, int n_of_lines)
 			break ;
 	}
 	if (!file[i])
-	{
-		printf("custom message format\n");
-		return (ERROR);
-	}
+		return (err("Map missing"));
 	*map = malloc((n_of_lines - i + 1) * sizeof(char *));
 	if (!(*map))
 	{
@@ -90,10 +87,7 @@ int	file_decomposer(t_preli *elements, int n_of_lines, char **file)
 	{
 		status = element_searcher(file[i], &elements);
 		if (status == ERROR)
-		{
-			printf("custom message map format 2\n");
 			return (ERROR);
-		}
 		else if (status == DONE)
 			break ;
 	}
