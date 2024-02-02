@@ -6,7 +6,7 @@
 /*   By: hepompid <hepompid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 18:45:29 by hepompid          #+#    #+#             */
-/*   Updated: 2024/02/02 17:42:59 by hepompid         ###   ########.fr       */
+/*   Updated: 2024/02/02 17:50:00 by hepompid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,6 @@ int	colors_manager(long int *color, char *color_line)
 {
 	t_colors	colors;
 	int			i;
-
-	(void)color;
 
 	colors.RED = -1;
 	colors.GREEN = -1;

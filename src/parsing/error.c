@@ -6,7 +6,7 @@
 /*   By: hepompid <hepompid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 11:27:33 by hepompid          #+#    #+#             */
-/*   Updated: 2024/02/02 17:07:11 by hepompid         ###   ########.fr       */
+/*   Updated: 2024/02/02 18:08:27 by hepompid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	print_title(void)
 {
-	printf("\033[5;31m");
+	printf("\033[6;31m");
 	printf(" ________  ___  ___  ________          ________  ________     \n"
 		"|\\   ____\\|\\  \\|\\  \\|\\   __  \\        |\\_____  \\|\\ "
 		"  ___  \\    \n\\ \\  \\___|\\ \\  \\\\\\  \\ \\  \\|\\  \\      "
@@ -67,7 +67,7 @@ void	print_text_end(void)
 int	err(char *message)
 {
 	char	*str;
-	
+
 	ft_printf("Error\n%s\n\nDo you need to read the cub3d "
 		"t\033[31mUwU\033[0mtorial ? (y/n) ", message);
 	str = get_next_line(0);
