@@ -6,18 +6,18 @@
 /*   By: hepompid <hepompid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 11:33:39 by hepompid          #+#    #+#             */
-/*   Updated: 2024/02/03 10:32:21 by hepompid         ###   ########.fr       */
+/*   Updated: 2024/02/03 11:17:48 by hepompid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-static int	texture_assigner(char ***texture_path, char *texture_line, int start, int end)
+static int	txtr_assignr(char ***txtr_path, char *txtr_line, int start, int end)
 {
 	int	i;
 
-	**texture_path = malloc((end - start + 2) * sizeof(char));
-	if (!(**texture_path))
+	**txtr_path = malloc((end - start + 2) * sizeof(char));
+	if (!(**txtr_path))
 	{
 		printf("Error\nA malloc failed\n");
 		return (ERROR);
@@ -25,32 +25,32 @@ static int	texture_assigner(char ***texture_path, char *texture_line, int start,
 	i = 0;
 	while (start <= end)
 	{
-		(**texture_path)[i] = texture_line[start];
+		(**txtr_path)[i] = txtr_line[start];
 		start++;
 		i++;
 	}
-	(**texture_path)[i] = 0;
+	(**txtr_path)[i] = 0;
 	return (OK);
 }
 
-static int	texture_manager(char **texture_path, char *texture_line)
+static int	texture_manager(char **texture_path, char *txtr_line)
 {
 	int	i;
 	int	j;
 
 	i = 0;
-	while (texture_line[i] && (texture_line[i] == ' ' || texture_line[i] == '\n'))
+	while (txtr_line[i] && (txtr_line[i] == ' ' || txtr_line[i] == '\n'))
 		i++;
-	if (texture_line[i])
+	if (txtr_line[i])
 		i += 2;
-	while (texture_line[i] && (texture_line[i] == ' ' || texture_line[i] == '\n'))
+	while (txtr_line[i] && (txtr_line[i] == ' ' || txtr_line[i] == '\n'))
 		i++;
-	if (!texture_line[i] || texture_line[i] == '\n')
+	if (!txtr_line[i] || txtr_line[i] == '\n')
 		return (err("Texture linking error\n"));
-	j = ft_strlen(texture_line) - 1;
-	while (j >= 0 && (texture_line[j] == ' ' || texture_line[j] == '\n'))
+	j = ft_strlen(txtr_line) - 1;
+	while (j >= 0 && (txtr_line[j] == ' ' || txtr_line[j] == '\n'))
 		j--;
-	if (texture_assigner(&texture_path, texture_line, i, j) == ERROR)
+	if (txtr_assignr(&texture_path, txtr_line, i, j) == ERROR)
 		return (ERROR);
 	return (OK);
 }
@@ -59,22 +59,31 @@ static int	texture_checker(t_elements **elements)
 {
 	int	fd;
 
-	fd = open((*elements)->NO, O_RDONLY);
+	fd = open((*elements)->no, O_RDONLY);
 	if (fd == -1)
-		return (err("Failed to open texture\n"));
+		return (err("failed to open texture\n"));
 	close(fd);
-	fd = open((*elements)->SO, O_RDONLY);
+	fd = open((*elements)->so, O_RDONLY);
 	if (fd == -1)
-		return (err("Failed to open texture\n"));
+		return (err("failed to open texture\n"));
 	close(fd);
-	fd = open((*elements)->WE, O_RDONLY);
+	fd = open((*elements)->we, O_RDONLY);
 	if (fd == -1)
-		return (err("Failed to open texture\n"));
+		return (err("failed to open texture\n"));
 	close(fd);
-	fd = open((*elements)->EA, O_RDONLY);
+	fd = open((*elements)->ea, O_RDONLY);
 	if (fd == -1)
-		return (err("Failed to open texture\n"));
+		return (err("failed to open texture\n"));
 	close(fd);
+	return (OK);
+}
+
+static int	element_checker(t_elements **elements)
+{
+	if (texture_checker(elements) == ERROR)
+		return (ERROR);
+	if (map_checker((*elements)->map) == ERROR)
+		return (ERROR);
 	return (OK);
 }
 
@@ -90,21 +99,19 @@ int	element_manager(char **file, int n_of_lines, t_elements **elements)
 		return (ERROR);
 	}
 	free(temp_elements.map);
-	if (texture_manager(&(*elements)->NO, temp_elements.NO) == ERROR)
+	if (texture_manager(&(*elements)->no, temp_elements.no) == ERROR)
 		return (ERROR);
-	if (texture_manager(&(*elements)->SO, temp_elements.SO) == ERROR)
+	if (texture_manager(&(*elements)->so, temp_elements.so) == ERROR)
 		return (ERROR);
-	if (texture_manager(&(*elements)->WE, temp_elements.WE) == ERROR)
+	if (texture_manager(&(*elements)->we, temp_elements.we) == ERROR)
 		return (ERROR);
-	if (texture_manager(&(*elements)->EA, temp_elements.EA) == ERROR)
+	if (texture_manager(&(*elements)->ea, temp_elements.ea) == ERROR)
 		return (ERROR);
-	if (colors_manager(&(*elements)->F, temp_elements.F) == ERROR)
+	if (colors_manager(&(*elements)->f, temp_elements.f) == ERROR)
 		return (ERROR);
-	if (colors_manager(&(*elements)->C, temp_elements.C) == ERROR)
+	if (colors_manager(&(*elements)->c, temp_elements.c) == ERROR)
 		return (ERROR);
-	if (texture_checker(elements) == ERROR)
-		return (ERROR);
-	if (map_checker((*elements)->map) == ERROR)
+	if (element_checker(elements) == ERROR)
 		return (ERROR);
 	return (OK);
 }

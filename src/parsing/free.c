@@ -6,7 +6,7 @@
 /*   By: hepompid <hepompid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 22:11:08 by hepompid          #+#    #+#             */
-/*   Updated: 2024/02/02 11:21:00 by hepompid         ###   ########.fr       */
+/*   Updated: 2024/02/03 10:40:49 by hepompid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,14 @@ void	malloc_error(char **table, int i)
 
 void	free_elements(t_elements elements)
 {
-	if (elements.NO)
-		free(elements.NO);
-	if (elements.SO)
-		free(elements.SO);
-	if (elements.WE)
-		free(elements.WE);
-	if (elements.EA)
-		free(elements.EA);
+	if (elements.no)
+		free(elements.no);
+	if (elements.so)
+		free(elements.so);
+	if (elements.we)
+		free(elements.we);
+	if (elements.ea)
+		free(elements.ea);
 	if (elements.map)
 		free_table(elements.map);
 }

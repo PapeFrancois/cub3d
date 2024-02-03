@@ -6,7 +6,7 @@
 /*   By: hepompid <hepompid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 09:31:31 by hepompid          #+#    #+#             */
-/*   Updated: 2024/02/03 10:27:31 by hepompid         ###   ########.fr       */
+/*   Updated: 2024/02/03 10:38:10 by hepompid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,17 @@
 # define OK 0
 # define ERROR 1
 # define DONE 2
+
+typedef struct s_elements
+{
+	char		*no;
+	char		*so;
+	char		*we;
+	char		*ea;
+	long int	f;
+	long int	c;
+	char		**map;
+}	t_elements;
 
 int	parsing(char *arg, t_elements *elements);
 

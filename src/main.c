@@ -6,7 +6,7 @@
 /*   By: hepompid <hepompid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 09:37:03 by hepompid          #+#    #+#             */
-/*   Updated: 2024/02/03 10:31:10 by hepompid         ###   ########.fr       */
+/*   Updated: 2024/02/03 10:46:45 by hepompid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@ int	main(int argc, char **argv)
 {
 	t_elements	elements;
 
-	elements.NO = NULL;
-	elements.SO = NULL;
-	elements.WE = NULL;
-	elements.EA = NULL;
+	elements.no = NULL;
+	elements.so = NULL;
+	elements.we = NULL;
+	elements.ea = NULL;
 	elements.map = NULL;
 	if (argc != 2)
 	{

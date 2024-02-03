@@ -6,40 +6,31 @@
 /*   By: hepompid <hepompid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 13:35:33 by hepompid          #+#    #+#             */
-/*   Updated: 2024/02/03 10:31:50 by hepompid         ###   ########.fr       */
+/*   Updated: 2024/02/03 11:18:29 by hepompid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSING_H
 # define PARSING_H
 
-typedef struct	s_preli
+typedef struct s_elements	t_elements;
+
+typedef struct s_preli
 {
-	char	*NO;
-	char	*SO;
-	char	*WE;
-	char	*EA;
-	char	*F;
-	char	*C;
+	char	*no;
+	char	*so;
+	char	*we;
+	char	*ea;
+	char	*f;
+	char	*c;
 	char	**map;
 }	t_preli;
 
-typedef struct	s_elements
+typedef struct s_colors
 {
-	char		*NO;
-	char		*SO;
-	char		*WE;
-	char		*EA;
-	long int	F;
-	long int	C;
-	char		**map;
-}	t_elements;
-
-typedef struct	s_colors
-{
-	int			RED;
-	int			GREEN;
-	int			BLUE;
+	int			red;
+	int			green;
+	int			blue;
 }	t_colors;
 
 void	malloc_error(char **table, int i);

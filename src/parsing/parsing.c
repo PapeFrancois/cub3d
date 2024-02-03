@@ -6,7 +6,7 @@
 /*   By: hepompid <hepompid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 10:18:28 by hepompid          #+#    #+#             */
-/*   Updated: 2024/02/03 10:27:06 by hepompid         ###   ########.fr       */
+/*   Updated: 2024/02/03 11:16:22 by hepompid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,23 +103,25 @@ int	parsing(char *arg, t_elements *elements)
 	return (OK);
 }
 
-/* void	elements_printer(t_elements elements)
-{
-	printf("NO = %s\nSO = %s\nWE = %s\nEA = %s\n", elements.NO, elements.SO, elements.WE, elements.EA);
-	printf("F = %ld\nC = %ld\n", elements.F, elements.C);
-	int i = 0;
-	while (elements.map[i])
-	{
-		printf("%s\n", elements.map[i]);
-		i++;
-	}
-} */
+// void	elements_printer(t_elements *elements)
+// {
+// 	printf("NO = %s\nSO = %s\nWE = %s\nEA = %s\n", 
+// 	elements->no, elements->so, elements->we, elements->ea);
+// 	printf("F = %ld\nC = %ld\n", elements->f, elements->c);
+// 	int i = 0;
+// 	while (elements->map[i])
+// 	{
+// 		printf("%s\n", elements->map[i]);
+// 		i++;
+// 	}
+// }
 
 // void	preli_printer(t_preli elements)
 // {
 // 	int	i;
 // 	printf("NO = %sSO = %sWE = %sEA = %sF = %sC = %s", 
-// 		elements.NO, elements. SO, elements.WE, elements.EA, elements.F, elements.C);
+// 	elements.NO, elements. SO, elements.WE, 
+// 	elements.EA, elements.F, elements.C);
 // 	i = 0;
 // 	while (elements.map[i])
 // 	{

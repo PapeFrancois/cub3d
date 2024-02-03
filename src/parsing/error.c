@@ -6,7 +6,7 @@
 /*   By: hepompid <hepompid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 11:27:33 by hepompid          #+#    #+#             */
-/*   Updated: 2024/02/03 10:32:47 by hepompid         ###   ########.fr       */
+/*   Updated: 2024/02/03 10:55:12 by hepompid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static void	print_text(void)
 
 static void	print_text_end(void)
 {
-	printf("🗺️  To not be as lost🕵️  as in your life, you need a correct map. \n"
+	printf("🗺️  To not be as lost🕵️  as in your life, you need a correct map.\n"
 		"     Make sure that you put it at the end of the file, because you "
 		"always\n     keep the best for last ! 🫶 ");
 }
