@@ -6,13 +6,13 @@
 /*   By: hepompid <hepompid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 14:57:05 by hepompid          #+#    #+#             */
-/*   Updated: 2024/02/02 17:24:17 by hepompid         ###   ########.fr       */
+/*   Updated: 2024/02/03 10:32:59 by hepompid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-int	element_searcher(char *line, t_preli **elements)
+static int	element_searcher(char *line, t_preli **elements)
 {
 	int	i;
 
@@ -41,7 +41,7 @@ int	element_searcher(char *line, t_preli **elements)
 	return (OK);
 }
 
-int	map_searcher(char **file, int i, char ***map, int n_of_lines)
+static int	map_searcher(char **file, int i, char ***map, int n_of_lines)
 {
 	int	j;
 

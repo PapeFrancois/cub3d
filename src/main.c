@@ -6,7 +6,7 @@
 /*   By: hepompid <hepompid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 09:37:03 by hepompid          #+#    #+#             */
-/*   Updated: 2024/01/30 22:14:11 by hepompid         ###   ########.fr       */
+/*   Updated: 2024/02/03 10:31:10 by hepompid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,20 @@
 
 int	main(int argc, char **argv)
 {
+	t_elements	elements;
+
+	elements.NO = NULL;
+	elements.SO = NULL;
+	elements.WE = NULL;
+	elements.EA = NULL;
+	elements.map = NULL;
 	if (argc != 2)
+	{
+		printf("Error\nThe program is expecting one argument\n");
 		return (0);
-	if (parsing(argv[1]) == ERROR)
+	}
+	if (parsing(argv[1], &elements) == ERROR)
 		return (1);
+	free_elements(elements);
 	return (0);
 }

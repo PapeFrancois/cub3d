@@ -6,7 +6,7 @@
 /*   By: hepompid <hepompid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 09:31:31 by hepompid          #+#    #+#             */
-/*   Updated: 2024/01/29 16:18:10 by hepompid         ###   ########.fr       */
+/*   Updated: 2024/02/03 10:27:31 by hepompid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,6 @@
 # define ERROR 1
 # define DONE 2
 
-int	parsing(char *arg);
+int	parsing(char *arg, t_elements *elements);
 
 #endif

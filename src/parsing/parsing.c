@@ -6,7 +6,7 @@
 /*   By: hepompid <hepompid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 10:18:28 by hepompid          #+#    #+#             */
-/*   Updated: 2024/02/02 18:03:41 by hepompid         ###   ########.fr       */
+/*   Updated: 2024/02/03 10:27:06 by hepompid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,18 +76,12 @@ static int	table_filler(char ***file, int fd, int n_of_lines)
 	return (OK);
 }
 
-int	parsing(char *arg)
+int	parsing(char *arg, t_elements *elements)
 {
 	int			fd;
 	int			n_of_lines;
 	char		**file;
-	t_elements	elements;
 
-	elements.NO = NULL;
-	elements.SO = NULL;
-	elements.WE = NULL;
-	elements.EA = NULL;
-	elements.map = NULL;
 	if (extension_checker(arg) == ERROR || file_opener(arg, &fd) == ERROR)
 		return (ERROR);
 	n_of_lines = line_counter(fd);
@@ -103,11 +97,9 @@ int	parsing(char *arg)
 	if (element_manager(file, n_of_lines, &elements) == ERROR)
 	{
 		free_table(file);
-		free_elements(elements);
 		return (ERROR);
 	}
 	free_table(file);
-	free_elements(elements);
 	return (OK);
 }
 

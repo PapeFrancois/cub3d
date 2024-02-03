@@ -6,13 +6,13 @@
 /*   By: hepompid <hepompid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 10:58:27 by hepompid          #+#    #+#             */
-/*   Updated: 2024/02/02 17:49:21 by hepompid         ###   ########.fr       */
+/*   Updated: 2024/02/03 10:33:20 by hepompid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-int	starting_point_finder(char *starting_point, char point)
+static int	starting_point_finder(char *starting_point, char point)
 {
 	if (point != '0' && point != '1' && point != ' ' && *starting_point)
 		return (err("Bad map format\n"));
@@ -25,7 +25,7 @@ int	starting_point_finder(char *starting_point, char point)
 	return (OK);
 }
 
-void	lentgh_and_width_finder(int *length, int *width, char **map)
+static void	lentgh_and_width_finder(int *length, int *width, char **map)
 {
 	*length = 0;
 	while (map[*length])
@@ -35,7 +35,7 @@ void	lentgh_and_width_finder(int *length, int *width, char **map)
 		(*width)++;
 }
 
-int	walls_checker(int length, int width, char **map, char starting_point)
+static int	walls_checker(int length, int width, char **map, char starting_point)
 {
 	int	i;
 	int	j;

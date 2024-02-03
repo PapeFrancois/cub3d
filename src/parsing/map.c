@@ -6,13 +6,13 @@
 /*   By: hepompid <hepompid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 13:14:09 by hepompid          #+#    #+#             */
-/*   Updated: 2024/01/31 22:13:36 by hepompid         ###   ########.fr       */
+/*   Updated: 2024/02/03 10:33:48 by hepompid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-int	max_len_finder(char **temp_map)
+static int	max_len_finder(char **temp_map)
 {
 	int	i;
 	int	j;
@@ -37,7 +37,7 @@ int	max_len_finder(char **temp_map)
 	return (len_max);
 }
 
-int	map_size_finder(char **temp_map)
+static int	map_size_finder(char **temp_map)
 {
 	int	i;
 	int	j;
@@ -62,7 +62,7 @@ int	map_size_finder(char **temp_map)
 	return (i + 1);
 }
 
-char	*line_filler(char *final_line, char *temp_line, int len_max)
+static char	*line_filler(char *final_line, char *temp_line, int len_max)
 {
 	int	i;
 

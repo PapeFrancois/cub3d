@@ -6,13 +6,13 @@
 /*   By: hepompid <hepompid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 18:45:29 by hepompid          #+#    #+#             */
-/*   Updated: 2024/02/02 17:50:00 by hepompid         ###   ########.fr       */
+/*   Updated: 2024/02/03 10:32:05 by hepompid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-int	color_splitter(char *color_line, int *end)
+static int	color_splitter(char *color_line, int *end)
 {
 	int	start;
 

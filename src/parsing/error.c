@@ -6,13 +6,13 @@
 /*   By: hepompid <hepompid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 11:27:33 by hepompid          #+#    #+#             */
-/*   Updated: 2024/02/02 18:08:27 by hepompid         ###   ########.fr       */
+/*   Updated: 2024/02/03 10:32:47 by hepompid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-void	print_title(void)
+static void	print_title(void)
 {
 	printf("\033[6;31m");
 	printf(" ________  ___  ___  ________          ________  ________     \n"
@@ -28,7 +28,7 @@ void	print_title(void)
 		"\n\n\n\n\n");
 }
 
-void	print_text(void)
+static void	print_text(void)
 {
 	printf("💐 Hey gyal welcome to this t\033[31mUwU\033[0mtorial in which "
 		"you'll learn\n"
@@ -57,7 +57,7 @@ void	print_text(void)
 	printf("\t  🫧 💗✨ Congrats sweet thing we're halfway done ! ✨💗🫧\n\n\n");
 }
 
-void	print_text_end(void)
+static void	print_text_end(void)
 {
 	printf("🗺️  To not be as lost🕵️  as in your life, you need a correct map. \n"
 		"     Make sure that you put it at the end of the file, because you "
