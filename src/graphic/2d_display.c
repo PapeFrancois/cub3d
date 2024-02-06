@@ -53,7 +53,7 @@ static void	display_2d_ray(t_game *game)
 	int		i;
 	
 	i = game->planeY;
-	while (i > -game->planeY);
+	while (i > -game->planeY)
 	{
 
 		double	rayX = game->x;
