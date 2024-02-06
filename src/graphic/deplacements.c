@@ -41,9 +41,7 @@ void	rotate(double x, int y, t_game *game)
 	x /= 10;
 	// printf("game->dirX: %f, game->dirY: %f\n", game->dirX, game->dirY);
 	rotate_matrix(&game->dirX, &game->dirY, x);
-	// double oldPlaneX = game->planeX;
-	// game->planeX = game->planeX * cos(-x) - game->planeY * sin(-x);
-	// game->planeY = oldPlaneX * sin(-x) + game->planeY * cos(-x);
+	rotate_matrix(&game->planeX, &game->planeY, x);
 	// printf("game->dirX: %f, game->dirY: %f\n", game->dirX, game->dirY);
 	refresh_screen(game);
 }

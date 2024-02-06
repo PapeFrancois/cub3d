@@ -12,9 +12,9 @@ int	destroy_mlx(t_mlx *display)
 
 void	refresh_screen(t_game *game)
 {
-	mlx_clear_window(game->display->mlx, game->display->win);
-	display_deformed_img(game->display, game->display->wall, 0, 0);
-	return ;
+	// mlx_clear_window(game->display->mlx, game->display->win);
+	// display_deformed_img(game->display, game->display->wall, 0, 0);
+	// return ;
 	if (game->display_mode == 2)
 		refresh_2d_screen(game);
 	else if (game->display_mode == 3)
@@ -90,7 +90,7 @@ t_game	init_game(t_mlx display)
 	game.dirX = 0;
 	game.dirY = 1;
 	game.planeX = 0;
-	game.planeY = 0.66;
+	game.planeY = 5;
 	game.display_mode = 2;
 	game.walking = 0;
 
