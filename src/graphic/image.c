@@ -25,6 +25,9 @@ void	display_deformed_img(t_mlx *mlx, t_img *img, int x, int y)
 {
 	int i;
 	int j;
+	(void) mlx;
+	(void) x;
+	(void) y;
 
 	i = 0;
 	while (i < img->width)
@@ -32,8 +35,8 @@ void	display_deformed_img(t_mlx *mlx, t_img *img, int x, int y)
 		j = 0;
 		while (j < img->height)
 		{
-			printf(mlx->wall->bits_per_pixel)
-			mlx_pixel_put(mlx->mlx, mlx->win, x + i, y + j, mlx->wall->addr[i + j * img->width]);
+			// printf(mlx->wall->bits_per_pixel);
+			// mlx_pixel_put(mlx->mlx, mlx->win, x + i, y + j, mlx->wall->addr[i + j * img->width]);
 			j++;
 		}
 		i++;
