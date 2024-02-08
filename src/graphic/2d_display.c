@@ -50,23 +50,32 @@ static void	draw_2d_map(t_game *game)
 
 static void	display_2d_ray(t_game *game)
 {
-	int		i;
+	double		i;
 	
-	i = game->planeY;
-	while (i > -game->planeY)
-	{
+	i = 1;
+	int j =0;
 
+	while (i > -1)
+	{
+		j++;
+		if (i < 0)
+			rotate_matrix(&game->dirX, &game->dirY, -0.02);
+		else if (i > 0)
+			rotate_matrix(&game->dirX, &game->dirY, 0.02);
 		double	rayX = game->x;
 		double	rayY = game->y;
 		while (game->display->map[(int)(rayX / MAP_SIZE)][(int)(rayY / MAP_SIZE)] == '0')
 		{
 			rayX += game->dirX;
-			rayY += game->dirY + i;
+			rayY += game->dirY;
 			mlx_pixel_put(game->display->mlx, game->display->win, rayX, rayY, 0x00FFF000);
 			// printf("rayX: %f, rayY: %f\n", rayX, rayY);
 		}
-		i--;
+		i -= 0.015;
+		// printf("i: %d\n", i);
 	}
+
+	printf("j: %d\n", j);//67
 }
 
 void	refresh_2d_screen(t_game *game)

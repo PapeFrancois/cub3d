@@ -26,6 +26,8 @@ typedef struct s_game
 	double			y;
 	double		dirX;
 	double		dirY;
+	double		rayDirX;
+	double		rayDirY;
 	double		planeX;
 	double		planeY;
 	int			walking;
@@ -43,6 +45,7 @@ void	display_deformed_img(t_mlx *mlx, t_img *img, int x, int y);
 /* FUNCTIONS */
 void	refresh_screen(t_game *game);
 void	rotate(double x, int y, t_game *game);
+void	rotate_matrix(double *x, double *y, double angle);
 void	move(int x, int y, t_game *game);
 
 #endif

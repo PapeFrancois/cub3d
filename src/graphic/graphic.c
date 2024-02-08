@@ -124,7 +124,8 @@ void	display()
 
 	display = init_mlx();
 	game = init_game(display);
-	init_images(game.display);
+	if (game.display_mode == 3)
+		init_images(game.display);
 	refresh_screen(&game);
 	mlx_loop_hook(display.mlx, key_loop_hook, &game);
 	mlx_hook(display.win, 17, 1L << 17, destroy_mlx, &game);
