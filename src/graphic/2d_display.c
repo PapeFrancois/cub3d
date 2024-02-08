@@ -52,29 +52,40 @@ static void	display_2d_ray(t_game *game)
 {
 	double		i;
 	
-	i = 1;
+	i = -1;
 	int j =0;
 
-	while (i <= 1)
-	{
 	game->rayDirX = game->dirX;
 	game->rayDirY = game->dirY;
+	rotate_matrix(&game->rayDirX, &game->rayDirY, -33*0.02);
+	while (i <= 1)
+	{
 		j++;
 		// if (i < 0)
 		// 	rotate_matrix(&game->rayDirX, &game->rayDirY, -0.02);
 		// else if (i > 0)
-		// rotate_matrix(&game->rayDirX, &game->rayDirY, 0.02);
+		rotate_matrix(&game->rayDirX, &game->rayDirY, 0.02);
 		double	rayX = game->x;
 		double	rayY = game->y;
 		while (game->display->map[(int)(rayX / MAP_SIZE)][(int)(rayY / MAP_SIZE)] == '0')
 		{
 			rayX += game->rayDirX;
-			rayY += game->rayDirX;
+			rayY += game->rayDirY;
 			mlx_pixel_put(game->display->mlx, game->display->win, rayX, rayY, 0x00FFF000);
 			// printf("rayX: %f, rayY: %f\n", rayX, rayY);
 		}
-		i += 0.05;
+		i += 0.03;
 		printf("i: %f\n", i);
+	}
+
+	double	rayX = game->x;
+	double	rayY = game->y;
+	while (game->display->map[(int)(rayX / MAP_SIZE)][(int)(rayY / MAP_SIZE)] == '0')
+	{
+		rayX += game->dirX;
+		rayY += game->dirY;
+		mlx_pixel_put(game->display->mlx, game->display->win, rayX, rayY, 0x00FF0000);
+		// printf("rayX: %f, rayY: %f\n", rayX, rayY);
 	}
 
 	printf("j: %d\n", j);//67
