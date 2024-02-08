@@ -31,6 +31,7 @@ typedef struct s_game
 	double		planeX;
 	double		planeY;
 	int			walking;
+	int			running;
 	int			display_mode;
 }	t_game;
 

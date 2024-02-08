@@ -39,6 +39,8 @@ int	key_hook(int keycode, t_game *game)
 		// move(0, -speed, game);
 	else if (keycode == 100) //d
 		rotate(speed, 0, game);
+	else if (keycode == 65505)
+			game->running = 3;
 	return (0);
 }
 
@@ -93,6 +95,7 @@ t_game	init_game(t_mlx display)
 	game.planeY = 5;
 	game.display_mode = 2;
 	game.walking = 0;
+	game.running = 1;
 
 	return (game);
 }
@@ -104,12 +107,15 @@ int	key_release_hook(int keycode, t_game *game)
 	printf("keycode: %d\n", keycode);
 	if (keycode == 119 || keycode == 115)
 		game->walking = 0;
+	if (keycode == 65505)
+			game->running = 1;
 	return (0);
 }
 
 int	key_loop_hook(t_game *game)
 {
-	move(0, game->walking, game);
+	move(0, game->walking * game->running, game);
+	// printf("game->walking: %d\n", game->walking);
 
 	// static unsigned int i = 0;
 	// i++;
