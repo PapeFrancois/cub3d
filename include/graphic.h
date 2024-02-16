@@ -5,7 +5,7 @@
 # include "../utils/libft/libft.h"
 # include <math.h>
 # include "image.h"
-# define MAP_SIZE 20
+# define MAP_SIZE 10
 
 typedef struct s_mlx
 {
@@ -24,13 +24,14 @@ typedef struct s_game
 	t_mlx		*display;
 	double			x;
 	double			y;
+	t_img		*img;
 	double		dirX;
 	double		dirY;
 	double		rayDirX;
 	double		rayDirY;
 	double		planeX;
 	double		planeY;
-	int			walking;
+	double			walking;
 	int			running;
 	int			display_mode;
 }	t_game;
@@ -47,6 +48,8 @@ void	display_deformed_img(t_mlx *mlx, t_img *img, int x, int y);
 void	refresh_screen(t_game *game);
 void	rotate(double x, int y, t_game *game);
 void	rotate_matrix(double *x, double *y, double angle);
-void	move(int x, int y, t_game *game);
+void	move(double x, double y, t_game *game);
+double cast_middle_ray(t_game *game);
+t_img	*create_image(t_game *game, int width, int height);
 
 #endif

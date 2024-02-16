@@ -13,7 +13,7 @@ void	init_images(t_mlx *mlx)
 		exit(1);
 	}
 	printf("good\n");
-	mlx->wall->addr = mlx_get_data_addr(mlx->wall->img, &mlx->wall->bits_per_pixel, &mlx->wall->size_line, &mlx->wall->endian);
+	mlx->wall->data = mlx_get_data_addr(mlx->wall->img, &mlx->wall->bits_per_pixel, &mlx->wall->size_line, &mlx->wall->endian);
 }
 
 void	display_img(t_mlx *mlx, t_img *img, int x, int y)
@@ -28,17 +28,9 @@ void	display_deformed_img(t_mlx *mlx, t_img *img, int x, int y)
 	(void) mlx;
 	(void) x;
 	(void) y;
+	(void) img;
+	(void) i;
+	(void) j;
+	
 
-	i = 0;
-	while (i < img->width)
-	{
-		j = 0;
-		while (j < img->height)
-		{
-			// printf(mlx->wall->bits_per_pixel);
-			// mlx_pixel_put(mlx->mlx, mlx->win, x + i, y + j, mlx->wall->addr[i + j * img->width]);
-			j++;
-		}
-		i++;
-	}
 }

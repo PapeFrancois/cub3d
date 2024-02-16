@@ -1,6 +1,6 @@
 #include "../../include/graphic.h"
 
-void	move(int x, int y, t_game *game)
+void	move(double x, double y, t_game *game)
 {
 	double oldX;
 	double oldY;
@@ -38,7 +38,7 @@ void	rotate(double x, int y, t_game *game)
 	if (x == 0)
 		return ;
 	// printf("x: %f, y: %d\n", x, y);
-	x /= 10;
+	x /= 15;
 	// printf("game->dirX: %f, game->dirY: %f\n", game->dirX, game->dirY);
 	rotate_matrix(&game->dirX, &game->dirY, x);
 	// rotate_matrix(&game->planeX, &game->planeY, x);
