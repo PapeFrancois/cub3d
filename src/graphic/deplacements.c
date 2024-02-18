@@ -1,18 +1,18 @@
 #include "../../include/graphic.h"
 
-void	move(double x, double y, t_game *game)
+void	move(double step, t_game *game)
 {
 	double oldX;
 	double oldY;
-	(void) x;
-	(void) y;
+	(void) step;
 	(void) game;
-	if (y == 0)
+	if (step == 0)
 		return ;
 	oldX = game->x;
 	oldY = game->y;
-	game->x += game->dirX * y;
-	game->y += game->dirY * y;
+	step /= 10;
+	game->x += game->dirX * step;
+	game->y += game->dirY * step;
 	if (game->display->map[(int)(game->x / MAP_SIZE)][(int)(oldY / MAP_SIZE)] == '1')
 	{
 		game->x = oldX;
@@ -31,16 +31,14 @@ void	rotate_matrix(double *x, double *y, double angle)
 	*y = oldX * sin(angle) + *y * cos(angle);
 }
 
-void	rotate(double x, int y, t_game *game)
+void	rotate(double angle, t_game *game)
 {
-	(void) x;
-	(void) y;
-	if (x == 0)
+	if (angle == 0)
 		return ;
-	// printf("x: %f, y: %d\n", x, y);
-	x /= 15;
+	// printf("angle: %f, y: %d\n", angle, y);
+	angle /= 100;
 	// printf("game->dirX: %f, game->dirY: %f\n", game->dirX, game->dirY);
-	rotate_matrix(&game->dirX, &game->dirY, x);
+	rotate_matrix(&game->dirX, &game->dirY, angle);
 	// rotate_matrix(&game->planeX, &game->planeY, x);
 	// printf("game->dirX: %f, game->dirY: %f\n", game->dirX, game->dirY);
 	refresh_screen(game);

@@ -6,6 +6,8 @@
 # include <math.h>
 # include "image.h"
 # define MAP_SIZE 10
+# define SCREEN_WIDTH 1920
+# define SCREEN_HEIGHT 1080
 
 typedef struct s_mlx
 {
@@ -32,6 +34,8 @@ typedef struct s_game
 	double		planeX;
 	double		planeY;
 	double			walking;
+	double			rotate;
+	int			crouch;
 	int			running;
 	int			display_mode;
 }	t_game;
@@ -46,9 +50,9 @@ void	display_deformed_img(t_mlx *mlx, t_img *img, int x, int y);
 
 /* FUNCTIONS */
 void	refresh_screen(t_game *game);
-void	rotate(double x, int y, t_game *game);
+void	rotate(double angle, t_game *game);
 void	rotate_matrix(double *x, double *y, double angle);
-void	move(double x, double y, t_game *game);
+void	move(double step, t_game *game);
 double cast_middle_ray(t_game *game);
 t_img	*create_image(t_game *game, int width, int height);
 

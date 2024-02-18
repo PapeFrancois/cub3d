@@ -15,11 +15,13 @@ void	refresh_screen(t_game *game)
 	// mlx_clear_window(game->display->mlx, game->display->win);
 	// create_image(game);
 	// return ;
+	game->img = create_image(game, SCREEN_WIDTH, SCREEN_HEIGHT);
 	refresh_3d_screen(game);
 	refresh_2d_screen(game);
+	mlx_clear_window(game->display->mlx, game->display->win);
 	mlx_put_image_to_window(game->display->mlx, game->display->win, game->img->img, 0, 0);
-
 	mlx_destroy_image(game->display->mlx, game->img->img);
+
 	free(game->img);
 	// if (game->display_mode == 2)
 	// else if (game->display_mode == 3)
@@ -34,17 +36,19 @@ int	key_hook(int keycode, t_game *game)
 	if (keycode == 65307)
 		destroy_mlx(game->display);
 	else if (keycode == 119) //w
-		game->walking = 0.5;
+		game->walking = 1;
 		// move(0, speed, game);
 	else if (keycode == 97)  //a
-		rotate(-speed, 0, game);
+		game->rotate = -1;
 	else if (keycode == 115) //s
-		game->walking = -0.5 ;
+		game->walking = -1 ;
 		// move(0, -speed, game);
 	else if (keycode == 100) //d
-		rotate(speed, 0, game);
+		game->rotate = 1;
 	else if (keycode == 65505)
-			game->running = 3;
+		game->running = 3;
+	else if (keycode == 65507)
+		game->crouch = 100;
 	return (0);
 }
 
@@ -80,7 +84,7 @@ t_mlx	init_mlx()
 	t_mlx	display;
 
 	display.mlx = mlx_init();
-	display.win = mlx_new_window(display.mlx, 1920, 1080, "covi3d");
+	display.win = mlx_new_window(display.mlx, SCREEN_WIDTH, SCREEN_HEIGHT, "covi3d");
 	display.map = create_map();
 
 	return (display);
@@ -94,11 +98,11 @@ t_game	init_game(t_mlx display)
 	game.x = 8 * MAP_SIZE;
 	game.y = 8 * MAP_SIZE;
 	game.dirX = 0;
-	game.dirY = 1;
-	game.planeX = 0;
-	game.planeY = 5;
+	game.dirY = -1;
 	game.display_mode = 3;
 	game.walking = 0;
+	game.crouch = 0;
+	game.rotate = 0;
 	game.running = 1;
 
 	return (game);
@@ -108,22 +112,25 @@ int	key_release_hook(int keycode, t_game *game)
 {
 	(void) keycode;
 	(void) game;
-	// printf("keycode: %d\n", keycode);
 	if (keycode == 119 || keycode == 115)
 		game->walking = 0;
-	if (keycode == 65505)
-			game->running = 1;
+	else if (keycode == 97 || keycode == 100)
+		game->rotate = 0;
+	else if (keycode == 65505)
+		game->running = 1;
+	else if (keycode == 65507)
+		game->crouch = 0;
 	return (0);
 }
 
 int	key_loop_hook(t_game *game)
 {
-	move(0, (double) (game->walking * game->running), game);
-	// printf("game->walking: %d\n", game->walking);
-
-	// static unsigned int i = 0;
-	// i++;
-	// printf("game->walking: %d\n", game->walking);
+	static int	tmp;
+	move((double) (game->walking * game->running), game);
+	rotate(game->rotate, game);
+	if (game->crouch != tmp)
+		refresh_screen(game);
+	tmp = game->crouch;
 	return (0);
 }
 

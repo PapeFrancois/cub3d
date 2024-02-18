@@ -54,14 +54,14 @@ void	fill_img(t_img *img, int color)
 
 void	display_3d_map(t_game *game)
 {
-	double j;
-	unsigned int	k;
-	int l;
-	double rayX;
-	double rayY;
+	double	j;
+	double	k;
+	double	l;
+	double	rayX;
+	double	rayY;
 	long double		i;
 	long double		step = 1;
-	step /= 1920;
+	step /= SCREEN_WIDTH;
 	step *= 2;
 	double		angle = M_PI/2/(2/step);
 
@@ -76,7 +76,6 @@ void	display_3d_map(t_game *game)
 
 	game->rayDirX = game->dirX;
 	game->rayDirY = game->dirY;
-	game->img = create_image(game, 1920, 1080);
 	l = 0;
 	rotate_matrix(&game->rayDirX, &game->rayDirY, -1 / step * (angle));
 	while (i <= 1)
@@ -86,47 +85,44 @@ void	display_3d_map(t_game *game)
 		rayY = game->y;
 		while (game->display->map[(int)(rayY / MAP_SIZE)][(int)(rayX / MAP_SIZE)] == '0')
 		{
-			rayX += game->rayDirX;
-			rayY += game->rayDirY;
+			rayX += (game->rayDirX/20);
+			rayY += (game->rayDirY/20);
 			*(unsigned int *)(game->img->data + (int) ((int) rayY * game->img->size_line + (int) rayX * (game->img->bits_per_pixel / 8))) = 0xFFFFFFFF;
 			if (i >= 0 - (step+step) && i <= 0 + (step+step))
 				*(unsigned int *)(game->img->data + (int) ((int) rayY * game->img->size_line + (int) rayX * (game->img->bits_per_pixel / 8))) = 0x00FF0000;
 			// j += 1;
 		}
-		// k = cos(rayX - game->x) * j;
-
 		long double distanceX;
-		distanceX = rayX - (double) game->x;
+		if (rayX > (double) game->x)
+			distanceX = rayX - (double) game->x;
+		else
+			distanceX = (double) game->x - rayX;
 		distanceX *= distanceX;
 		long double distanceY;
-		distanceY = rayY - (double) game->y;
+		if (rayY > (double) game->y)
+			distanceY = rayY - (double) game->y;
+		else
+			distanceY = (double) game->y - rayY;
 		distanceY *= distanceY;
 		if (distanceX > distanceY)
 			j = sqrt(distanceX);
 		else
 			j = sqrt(distanceY);
-		// j = sqrt(distanceX + distanceY);
-
-		if (l == 960)
-			printf("j: %f\n", j);
-		unsigned int calc = 1080/2;
+		double calc = SCREEN_HEIGHT/2;
 		if (j != 0)
-			calc /= j;
-		// calc /= 2;
-		// calc *= 5;
+			calc /= (double) j;
 		for (k = 0; k < (double) calc; k++)
 		{
-			if (k+1080/2 < 1080 && l < 1920 && k+1080/2 > 0 && l > 0)
-				*(unsigned int *)(game->img->data + (int) ((k+1080/2) * game->img->size_line + (l) * (game->img->bits_per_pixel / 8))) = 0x00FF0000;
-			// *(unsigned int *)(game->img->data + (int) ((k+1080/2) * game->img->size_line + (l) * (game->img->bits_per_pixel / 8))) = 0x00FF0000;
-			if (1080/2-k < 1080 && l < 1920 && 1080/2-k > 0 && l > 0)
-				*(unsigned int *)(game->img->data + (int) ((1080/2-k) * game->img->size_line + (l) * (game->img->bits_per_pixel / 8))) = 0x00FF0000;
+			if (k+(SCREEN_HEIGHT/2) < SCREEN_HEIGHT && l < SCREEN_WIDTH && k+(SCREEN_HEIGHT/2) > 0 && l > 0)
+				*(unsigned int *)(game->img->data + (int) ((k+SCREEN_HEIGHT/2-game->crouch) * game->img->size_line + (l) * (game->img->bits_per_pixel / 8))) = 0x00FF0000;
+			// *(unsigned int *)(game->img->data + (int) ((k+SCREEN_HEIGHT/2) * game->img->size_line + (l) * (game->img->bits_per_pixel / 8))) = 0x00FF0000;
+			if (SCREEN_HEIGHT/2-k < SCREEN_HEIGHT && l < SCREEN_WIDTH && SCREEN_HEIGHT/2-k > 0 && l > 0)
+				*(unsigned int *)(game->img->data + (int) ((SCREEN_HEIGHT/2-k-game->crouch) * game->img->size_line + (l) * (game->img->bits_per_pixel / 8))) = 0x00FF0000;
 		}
 		rotate_matrix(&game->rayDirX, &game->rayDirY, angle);
 		l++;
 		i += step;
 	}
-	// printf("l: %d\n", l);
 	// int distance_from_player = cast_middle_ray(game);
 	// double tangente = tan(45) * distance_from_player;
 	// (void)distance_from_player;
@@ -134,7 +130,7 @@ void	display_3d_map(t_game *game)
 
 void	refresh_3d_screen(t_game *game)
 {
-	mlx_clear_window(game->display->mlx, game->display->win);
+	// mlx_clear_window(game->display->mlx, game->display->win);
 
 	display_3d_map(game);
 
