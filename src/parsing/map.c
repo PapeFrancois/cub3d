@@ -6,11 +6,31 @@
 /*   By: hepompid <hepompid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 13:14:09 by hepompid          #+#    #+#             */
-/*   Updated: 2024/02/03 10:51:58 by hepompid         ###   ########.fr       */
+/*   Updated: 2024/02/19 13:02:28 by hepompid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
+
+char	**space_replacer(char **map)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (map[i])
+	{
+		j = 0;
+		while (map[i][j])
+		{
+			if (map[i][j] == ' ')
+				map[i][j] = '1';
+			j++;
+		}
+		i++;
+	}
+	return (map);
+}
 
 static int	max_len_finder(char **temp_map)
 {

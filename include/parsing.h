@@ -6,7 +6,7 @@
 /*   By: hepompid <hepompid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 13:35:33 by hepompid          #+#    #+#             */
-/*   Updated: 2024/02/03 11:18:29 by hepompid         ###   ########.fr       */
+/*   Updated: 2024/02/19 13:02:56 by hepompid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,6 @@ void	free_elements(t_elements elements);
 int		colors_manager(long int *color, char *color_line);
 int		map_checker(char **map);
 int		err(char *message);
+char	**space_replacer(char **map);
 
 #endif
