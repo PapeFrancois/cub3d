@@ -6,11 +6,11 @@
 /*   By: hepompid <hepompid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 11:33:39 by hepompid          #+#    #+#             */
-/*   Updated: 2024/02/21 12:08:58 by hepompid         ###   ########.fr       */
+/*   Updated: 2024/02/21 14:45:24 by hepompid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/cub3d.h"
+#include "../../include/parsing.h"
 
 static int	txtr_assignr(char ***txtr_path, char *txtr_line, int start, int end)
 {

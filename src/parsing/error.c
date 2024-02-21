@@ -6,11 +6,11 @@
 /*   By: hepompid <hepompid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 11:27:33 by hepompid          #+#    #+#             */
-/*   Updated: 2024/02/03 10:55:12 by hepompid         ###   ########.fr       */
+/*   Updated: 2024/02/21 14:44:45 by hepompid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/cub3d.h"
+#include "../../include/parsing.h"
 
 static void	print_title(void)
 {

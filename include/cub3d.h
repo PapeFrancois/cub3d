@@ -6,7 +6,7 @@
 /*   By: hepompid <hepompid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 09:31:31 by hepompid          #+#    #+#             */
-/*   Updated: 2024/02/03 10:38:10 by hepompid         ###   ########.fr       */
+/*   Updated: 2024/02/21 14:46:34 by hepompid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,6 @@
 # include <string.h>
 
 # include "../utils/libft/libft.h"
-# include "../utils/get_next_line/get_next_line.h"
-
-# include "parsing.h"
 
 # define OK 0
 # define ERROR 1
@@ -42,5 +39,7 @@ typedef struct s_elements
 }	t_elements;
 
 int	parsing(char *arg, t_elements *elements);
+void	free_elements(t_elements elements);
+int raycasting(void);
 
 #endif

@@ -6,11 +6,11 @@
 /*   By: hepompid <hepompid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 18:45:29 by hepompid          #+#    #+#             */
-/*   Updated: 2024/02/03 10:53:31 by hepompid         ###   ########.fr       */
+/*   Updated: 2024/02/21 14:44:38 by hepompid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/cub3d.h"
+#include "../../include/parsing.h"
 
 static int	color_splitter(char *clr_line, int *end)
 {

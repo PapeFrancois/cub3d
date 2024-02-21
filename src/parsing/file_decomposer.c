@@ -6,11 +6,11 @@
 /*   By: hepompid <hepompid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 14:57:05 by hepompid          #+#    #+#             */
-/*   Updated: 2024/02/03 11:14:24 by hepompid         ###   ########.fr       */
+/*   Updated: 2024/02/21 14:44:52 by hepompid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/cub3d.h"
+#include "../../include/parsing.h"
 
 static int	element_searcher(char *line, t_preli **elements)
 {

@@ -12,7 +12,9 @@ SRCS =			main.c \
 				map.c \
 				colors.c \
 				map_checker.c \
-				error.c
+				error.c \
+				\
+				raycasting.c
 
 
 ###### VARIABLES ####################################
@@ -22,7 +24,7 @@ CC = 			cc
 
 CFLAGS = 		-Wall -Wextra -Werror -g3
 
-VPATH = 		src/:utils/get_next_line/:src/parsing/
+VPATH = 		src/:utils/get_next_line/:src/parsing/:src/raycasting
 
 OBJ_DIR = 		obj_files
 

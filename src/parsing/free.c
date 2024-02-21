@@ -6,11 +6,11 @@
 /*   By: hepompid <hepompid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 22:11:08 by hepompid          #+#    #+#             */
-/*   Updated: 2024/02/03 10:40:49 by hepompid         ###   ########.fr       */
+/*   Updated: 2024/02/21 14:44:56 by hepompid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/cub3d.h"
+#include "../../include/parsing.h"
 
 void	malloc_error(char **table, int i)
 {
