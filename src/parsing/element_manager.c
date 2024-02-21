@@ -6,7 +6,7 @@
 /*   By: hepompid <hepompid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 11:33:39 by hepompid          #+#    #+#             */
-/*   Updated: 2024/02/03 11:17:48 by hepompid         ###   ########.fr       */
+/*   Updated: 2024/02/21 12:08:58 by hepompid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,3 +115,19 @@ int	element_manager(char **file, int n_of_lines, t_elements **elements)
 		return (ERROR);
 	return (OK);
 }
+
+// void	preli_printer(t_preli elements)
+// {
+// 	int	i;
+// 	printf("PRELI PRINTING\n");
+// 	printf("NO = %sSO = %sWE = %sEA = %sF = %sC = %s", 
+// 	elements.no, elements. so, elements.we, 
+// 	elements.ea, elements.f, elements.c);
+// 	i = 0;
+// 	while (elements.map[i])
+// 	{
+// 		printf("%s", elements.map[i]);
+// 		i++;
+// 	}
+// 	printf("\n");
+// }

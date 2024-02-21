@@ -6,7 +6,7 @@
 /*   By: hepompid <hepompid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 13:14:09 by hepompid          #+#    #+#             */
-/*   Updated: 2024/02/19 13:02:28 by hepompid         ###   ########.fr       */
+/*   Updated: 2024/02/21 12:08:28 by hepompid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,17 +106,17 @@ int	map_manager(char ***final_map, char **temp_map)
 	int	i;
 	int	len;
 
-	len = max_len_finder(temp_map);
-	*final_map = malloc((len + 1) * sizeof(char *));
+	*final_map = malloc((map_size_finder(temp_map) + 1) * sizeof(char *));
 	if (!(*final_map))
 	{
 		printf("Error\nA malloc failed\n");
 		return (ERROR);
 	}
+	len = max_len_finder(temp_map);
 	i = 0;
 	while (i < map_size_finder(temp_map))
 	{
-		(*final_map)[i] = malloc((max_len_finder(temp_map) + 1) * sizeof(char));
+		(*final_map)[i] = malloc((len + 1) * sizeof(char));
 		if (!(*final_map)[i])
 		{
 			malloc_error(*final_map, i - 1);

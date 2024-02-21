@@ -6,7 +6,7 @@
 /*   By: hepompid <hepompid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 10:18:28 by hepompid          #+#    #+#             */
-/*   Updated: 2024/02/19 13:02:23 by hepompid         ###   ########.fr       */
+/*   Updated: 2024/02/21 12:09:28 by hepompid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,18 +116,3 @@ int	parsing(char *arg, t_elements *elements)
 		i++;
 	}
 } */
-
-// void	preli_printer(t_preli elements)
-// {
-// 	int	i;
-// 	printf("NO = %sSO = %sWE = %sEA = %sF = %sC = %s", 
-// 	elements.NO, elements. SO, elements.WE, 
-// 	elements.EA, elements.F, elements.C);
-// 	i = 0;
-// 	while (elements.map[i])
-// 	{
-// 		printf("%s", elements.map[i]);
-// 		i++;
-// 	}
-// 	printf("\n");
-// }

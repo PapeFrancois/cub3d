@@ -6,7 +6,7 @@
 /*   By: hepompid <hepompid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 10:58:27 by hepompid          #+#    #+#             */
-/*   Updated: 2024/02/03 10:54:10 by hepompid         ###   ########.fr       */
+/*   Updated: 2024/02/21 12:13:47 by hepompid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 static int	starting_point_finder(char *starting_point, char point)
 {
 	if (point != '0' && point != '1' && point != ' ' && *starting_point)
-		return (err("Bad map format\n"));
+		return (err("Unexpected character\n"));
 	else if (point != '0' && point != '1' && point != ' ' && !(*starting_point))
 		*starting_point = point;
 	if (*starting_point && (*starting_point) != 'N'
-		&& (*starting_point) != 'S' && (*starting_point) == 'W'
+		&& (*starting_point) != 'S' && (*starting_point) != 'W'
 		&& (*starting_point) != 'E')
-		return (err("Bad starting position\n"));
+		return (err("Unexpected character\n"));
 	return (OK);
 }
 
