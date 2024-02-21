@@ -1,37 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   raycasting.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hepompid <hepompid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/19 09:37:03 by hepompid          #+#    #+#             */
-/*   Updated: 2024/02/21 14:57:47 by hepompid         ###   ########.fr       */
+/*   Created: 2024/02/21 12:28:15 by hepompid          #+#    #+#             */
+/*   Updated: 2024/02/21 15:05:31 by hepompid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3d.h"
+#ifndef RAYCASTING_H
+# define RAYCASTING_H
 
-int	main(int argc, char **argv)
+# include <math.h>
+# include "cub3d.h"
+# include "../minilibx-linux/mlx.h"
+
+typedef struct s_elements t_elements;
+
+typedef struct s_game
 {
+	void		*mlx;
+	void		*mlx_win;
 	t_elements	elements;
+}	t_game;
 
-	elements.no = NULL;
-	elements.so = NULL;
-	elements.we = NULL;
-	elements.ea = NULL;
-	elements.map = NULL;
-	if (argc != 2)
-	{
-		printf("Error\nThe program is expecting one argument\n");
-		return (0);
-	}
-	if (parsing(argv[1], &elements) == ERROR)
-	{
-		free_elements(elements);
-		return (1);
-	}
-	raycasting(elements);
-	free_elements(elements);
-	return (0);
-}
+#endif

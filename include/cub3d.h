@@ -6,7 +6,7 @@
 /*   By: hepompid <hepompid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 09:31:31 by hepompid          #+#    #+#             */
-/*   Updated: 2024/02/21 14:46:34 by hepompid         ###   ########.fr       */
+/*   Updated: 2024/02/21 14:57:59 by hepompid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,6 @@ typedef struct s_elements
 
 int	parsing(char *arg, t_elements *elements);
 void	free_elements(t_elements elements);
-int raycasting(void);
+int raycasting(t_elements elements);
 
 #endif
