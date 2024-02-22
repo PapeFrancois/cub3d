@@ -127,7 +127,7 @@ int	key_loop_hook(t_game *game)
 {
 	static int	tmp;
 	move((double) (game->walking * game->running), game);
-	rotate(game->rotate, game);
+	rotate(game->rotate * game->running, game);
 	if (game->crouch != tmp)
 		refresh_screen(game);
 	tmp = game->crouch;
@@ -141,6 +141,7 @@ void	display()
 
 	display = init_mlx();
 	game = init_game(display);
+	// init_images(&display);
 	if (game.display_mode == 3)
 		init_images(game.display);
 	for (int i = 0; display.map[i]; i++)

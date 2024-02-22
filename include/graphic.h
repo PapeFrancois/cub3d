@@ -5,7 +5,7 @@
 # include "../utils/libft/libft.h"
 # include <math.h>
 # include "image.h"
-# define MAP_SIZE 10
+# define MAP_SIZE 15
 # define SCREEN_WIDTH 1920
 # define SCREEN_HEIGHT 1080
 

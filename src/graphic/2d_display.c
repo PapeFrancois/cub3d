@@ -4,14 +4,11 @@
 static void draw_2d_player(t_game *game)
 {
 	(void)game;
-	// printf("game->x: %f, game->y: %f\n", game->x, game->y);
-	// printf("game->img->size_line: %d, game->img->bits_per_pixel: %d\n", game->img->size_line, game->img->bits_per_pixel);
 	for (int i = -2; i < 3; i++)
 	{
 		for (int j = -2; j < 3; j++)
 		{
 			*(unsigned int *)(game->img->data + (int) (((int) (game->y)+i) * game->img->size_line + (j + ((int) game->x)) * (game->img->bits_per_pixel / 8))) = 0x00FFFFFF;
-			// mlx_pixel_put(game->display->mlx, game->display->win, game->x + i, game->y + j, 0x0000FF00);
 		}
 	}
 }
@@ -31,7 +28,7 @@ static void	draw_2d_map(t_game *game)
 		j = 0;
 		while (game->display->map[i][j])
 		{
-			if (game->display->map[i][j] == '1')
+			if (game->display->map[j][i] == '1')
 			{
 				k = 0;
 				while (k < size)
