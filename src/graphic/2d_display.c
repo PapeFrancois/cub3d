@@ -4,11 +4,11 @@
 static void draw_2d_player(t_game *game)
 {
 	(void)game;
-	for (int i = -2; i < 3; i++)
+	for (int i = 0; i < 0 + 5; i++)
 	{
-		for (int j = -2; j < 3; j++)
+		for (int j = 0; j < 0 + 5; j++)
 		{
-			*(unsigned int *)(game->img->data + (int) (((int) (game->y)+i) * game->img->size_line + (j + ((int) game->x)) * (game->img->bits_per_pixel / 8))) = 0x00FFFFFF;
+			*(unsigned int *)(game->img->data + (int) (((int) (game->y * MAP_SIZE)+i) * game->img->size_line + (j + ((int) game->x * MAP_SIZE)) * (game->img->bits_per_pixel / 8))) = 0x00FFFFFF;
 		}
 	}
 }
@@ -50,21 +50,21 @@ static void draw_2d_player(t_game *game)
 
 } 
 
-double cast_middle_ray(t_game *game)
-{
-	double rayX = game->x;
-	double rayY = game->y;
-	int	size = 0;
-	while (game->display->map[(int)(rayX / MAP_SIZE)][(int)(rayY / MAP_SIZE)] == '0')
-	{
-		size += 1;
-		rayX += game->dirX;
-		rayY += game->dirY;
-		// mlx_pixel_put(game->display->mlx, game->display->win, rayX, rayY, 0x00FF0000);
-		// printf("rayX: %f, rayY: %f\n", rayX, rayY);
-	}
-	return (size);
-}
+// double cast_middle_ray(t_game *game)
+// {
+// 	double rayX = game->x;
+// 	double rayY = game->y;
+// 	int	size = 0;
+// 	while (game->display->map[(int)(rayX / MAP_SIZE)][(int)(rayY / MAP_SIZE)] == '0')
+// 	{
+// 		size += 1;
+// 		rayX += game->dirX;
+// 		rayY += game->dirY;
+// 		// mlx_pixel_put(game->display->mlx, game->display->win, rayX, rayY, 0x00FF0000);
+// 		// printf("rayX: %f, rayY: %f\n", rayX, rayY);
+// 	}
+// 	return (size);
+// }
 
 int	create_trgb(int t, int r, int g, int b)
 {

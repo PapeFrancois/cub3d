@@ -33,8 +33,9 @@ typedef struct s_game
 	double		rayDirY;
 	double		planeX;
 	double		planeY;
-	double			walking;
-	double			rotate;
+	double		cameraX;
+	double		walking;
+	double		rotate;
 	int			crouch;
 	int			running;
 	int			mouseX;

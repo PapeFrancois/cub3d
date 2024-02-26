@@ -48,13 +48,12 @@ int	key_hook(int keycode, t_game *game)
 {
 	int	speed;
 
-	printf("keycode: %d\n", keycode);
 	speed = 1;
 	// game->walking = 1;
 	if (keycode == 65307)
 		destroy_mlx(game->display);
 	else if (keycode == 119) //w
-		game->walking = 3;
+		game->walking = 2;
 		// move(0, speed, game);
 	else if (keycode == 97)  //a
 		game->rotate = -1;
@@ -114,8 +113,8 @@ t_game	init_game(t_mlx display)
 	t_game	game;
 
 	game.display = &display;
-	game.x = 8 * MAP_SIZE;
-	game.y = 8 * MAP_SIZE;
+	game.x = 8;
+	game.y = 8;
 	game.dirX = 0;
 	game.dirY = -1;
 	game.display_mode = 3;
@@ -147,8 +146,8 @@ int	key_release_hook(int keycode, t_game *game)
 int	key_loop_hook(t_game *game)
 {
 	static int	tmp;
-	move((double) (game->walking * game->running), game);
-	rotate(game->rotate * game->running, game);
+	move((double) ((game->walking) * game->running), game);
+	rotate((double)(game->rotate) * (double) ((double) game->running / 1.5), game);
 	if (game->crouch != tmp)
 		refresh_screen(game);
 	tmp = game->crouch;

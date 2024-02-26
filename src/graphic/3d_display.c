@@ -56,7 +56,10 @@ void	display_3d_map(t_game *game)
 	long double	i;
 	long double	step = 1;
 	double		angle;
-	double		total_angle;
+	double		dirX;
+	double		dirY;
+	double		planeX;
+	double		planeY;
 
 	(void) i;
 	(void) j;
@@ -70,62 +73,92 @@ void	display_3d_map(t_game *game)
 	step /= SCREEN_WIDTH;
 	step *= 2;
 	angle = M_PI/2/(2/step);
-	total_angle = -SCREEN_WIDTH/2;
 	game->rayDirX = game->dirX;
 	game->rayDirY = game->dirY;
 	l = 0;
 	double tmpangle = -M_PI/4;
-	rotate_matrix(&game->rayDirX, &game->rayDirY, -1 / step * (angle));
-	while (tmpangle < M_PI/4)
+	dirX = game->dirX;
+	dirY = game->dirY;
+	planeX = game->planeX;
+	planeY = game->planeY;
+	rotate_matrix(&dirX, &dirY, -M_PI/4);
+	while (tmpangle <= M_PI/4)
 	{
-		j = 0;
-		tmpangle += M_PI/2/SCREEN_WIDTH;
+		double cameraX = 2 * l / (double)SCREEN_WIDTH - 1;
+		double rayDirX = dirX + planeX * cameraX;
+		double rayDirY = dirY + planeY * cameraX;
+		
 		rayX = game->x;
 		rayY = game->y;
-		while (game->display->map[(int)(rayY/MAP_SIZE)][(int)(rayX/MAP_SIZE)] && game->display->map[(int)(rayY/MAP_SIZE)][(int)(rayX/MAP_SIZE)] == '0')
-		{	
-			rayX += (game->rayDirX/5);
-			rayY += (game->rayDirY/5);
-			*(unsigned int *)(game->img->data + (int) ((int) rayY * game->img->size_line + (int) rayX * (game->img->bits_per_pixel / 8))) = 0xFFFFFFFF;
-			if (i >= 0 - (step+step) && i <= 0 + (step+step))
-				*(unsigned int *)(game->img->data + (int) ((int) rayY * game->img->size_line + (int) rayX * (game->img->bits_per_pixel / 8))) = 0x00FF0000;
-			// j += 1;
-		}
-				j = get_distance(game, rayX, rayY);
 
-		long double distanceX;
-		long double distanceY;
-		
-		if (rayX > (double) game->x)
-			distanceX = rayX - (double) game->x;
-		else
-			distanceX = (double) game->x - rayX;
-		// distanceX *= distanceX;
-		if (rayY > (double) game->y)
-			distanceY = rayY - (double) game->y;
-		else
-			distanceY = (double) game->y - rayY;
+		double sideDistX;
+		double sideDistY;
 
-		// j = cos(total_angle) / j;
-		double calc = SCREEN_HEIGHT/2;
-		if (j != 0)
-			calc /= (double) (j/10);
-		for (k = 0; k < (double) calc; k++)
+		double deltaDistX = (rayDirX == 0) ? 1e30 : fabs(1 / rayDirX);
+		double deltaDistY = (rayDirY == 0) ? 1e30 : fabs(1 / rayDirY);
+		double perpWallDist;
+		(void) perpWallDist;
+
+		double stepX;
+		double stepY;
+		double side;
+		double steper = 0.01;
+		if (rayDirX < 0)
 		{
-			if (((k+SCREEN_HEIGHT/2-game->crouch) < SCREEN_HEIGHT && l < SCREEN_WIDTH &&  (k+SCREEN_HEIGHT/2-game->crouch) >= 0 && l >= 0) &&
-				*(unsigned int *)(game->img->data + (int) ((k+SCREEN_HEIGHT/2-game->crouch) * game->img->size_line + (l) * (game->img->bits_per_pixel / 8))) != 0xFFFFFFFF)
-				*(unsigned int *)(game->img->data + (int) ((k+SCREEN_HEIGHT/2-game->crouch) * game->img->size_line + (l) * (game->img->bits_per_pixel / 8))) = 0x00FF0000;
-			// *(unsigned int *)(game->img->data + (int) ((k+SCREEN_HEIGHT/2) * game->img->size_line + (l) * (game->img->bits_per_pixel / 8))) = 0x00FF0000;
-			if (((SCREEN_HEIGHT/2-k-game->crouch) < SCREEN_HEIGHT && l < SCREEN_WIDTH && (SCREEN_HEIGHT/2-k-game->crouch) >= 0 && l >= 0) &&
-				*(unsigned int *)(game->img->data + (int) ((SCREEN_HEIGHT/2-k-game->crouch) * game->img->size_line + (l) * (game->img->bits_per_pixel / 8))) != 0xFFFFFFFF)
-				*(unsigned int *)(game->img->data + (int) ((SCREEN_HEIGHT/2-k-game->crouch) * game->img->size_line + (l) * (game->img->bits_per_pixel / 8))) = 0x00FF0000;
+			stepX = -steper;
+			sideDistX = (game->x - rayX) * deltaDistX;
 		}
-		rotate_matrix(&game->rayDirX, &game->rayDirY, angle);
-		if (i < 0)
-			total_angle -= angle;
-		else if (i > 0)
-			total_angle += angle;
-		i++;
+		else
+		{
+			stepX = steper;
+			sideDistX = (rayX + 1.0 - game->x) * deltaDistX;
+		}
+		if (rayDirY < 0)
+		{
+			stepY = -steper;
+			sideDistY = (game->y - rayY) * deltaDistY;
+		}
+		else
+		{
+			stepY = steper;
+			sideDistY = (rayY + 1.0 - game->y) * deltaDistY;
+		}
+		while (game->display->map[(int)(rayY)][(int)(rayX)] && game->display->map[(int)(rayY)][(int)(rayX)] == '0')
+		{
+
+			if (sideDistX < sideDistY)
+			{
+				sideDistX += deltaDistX;
+				rayX += stepX;
+				side = 0;
+			}
+			else
+			{
+				sideDistY += deltaDistY;
+				rayY += stepY;
+				side = 1;
+			}
+		}
+		if(side == 0)
+			perpWallDist = (sideDistX - deltaDistX);
+		else
+			perpWallDist = (sideDistY - deltaDistY);
+      	double lineHeight = (SCREEN_HEIGHT / perpWallDist * 50);
+		double drawStart = -lineHeight / 2 + SCREEN_HEIGHT / 2;
+		if(drawStart < 0)
+			drawStart = 0;
+		double drawEnd = lineHeight / 2 + SCREEN_HEIGHT / 2;
+		if(drawEnd >= SCREEN_HEIGHT)
+			drawEnd = SCREEN_HEIGHT - 1;
+
+		
+		for(int y = drawStart; y < drawEnd; y++)
+		{
+			*(unsigned int *)(game->img->data + (int) (y * game->img->size_line + (int) l * (game->img->bits_per_pixel / 8))) = 0x00FF0000;
+		}
+
+		rotate_matrix(&dirX, &dirY, M_PI / 2 / SCREEN_WIDTH);
+		tmpangle += M_PI/2/SCREEN_WIDTH;
 		l++;
 	}
 }
