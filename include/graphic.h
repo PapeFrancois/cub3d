@@ -37,6 +37,9 @@ typedef struct s_game
 	double			rotate;
 	int			crouch;
 	int			running;
+	int			mouseX;
+	int			mouseY;
+	int			mousing;
 	int			display_mode;
 }	t_game;
 

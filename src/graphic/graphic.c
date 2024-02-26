@@ -27,10 +27,28 @@ void	refresh_screen(t_game *game)
 	// else if (game->display_mode == 3)
 }
 
+int mouse_hook(int x, int y, t_game *game)
+{
+	(void) x;
+	(void) y;
+	(void) game;
+	// if (game->mouseX != -1 && game->mousing == 1)
+	// 	rotate(-(game->mouseX - x) / 10, game);
+	// game->mouseX = x;
+	// game->mouseY = y;
+	// game->mousing = 0;
+	// // mlx_mouse_move(game->display->mlx, game->display->win, SCREEN_WIDTH/2, SCREEN_HEIGHT/2);
+	// game->mousing = 1;
+
+	// refresh_screen(game);
+	return (0);
+}
+
 int	key_hook(int keycode, t_game *game)
 {
 	int	speed;
 
+	printf("keycode: %d\n", keycode);
 	speed = 1;
 	// game->walking = 1;
 	if (keycode == 65307)
@@ -105,6 +123,8 @@ t_game	init_game(t_mlx display)
 	game.crouch = 0;
 	game.rotate = 0;
 	game.running = 1;
+	game.mouseX = -1;
+	game.mouseY = -1;
 
 	return (game);
 }
@@ -151,6 +171,8 @@ void	display()
 	mlx_loop_hook(display.mlx, key_loop_hook, &game);
 	mlx_hook(display.win, 17, 1L << 17, destroy_mlx, &game);
 	mlx_hook(display.win, 2, 1L << 0, key_hook, &game);
+	mlx_hook(display.win, 6, 1L << 6, mouse_hook, &game);
+
 	mlx_hook(display.win, 3, 1L << 1, key_release_hook, &game);
 	mlx_loop(display.mlx);
 }

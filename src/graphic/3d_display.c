@@ -20,7 +20,6 @@ t_img	*create_image(t_game *game, int width, int height)
 	img_data->size_line = 0;
 	img_data->endian = 0;
 	img_data->data = (char *) mlx_get_data_addr(img_data->img, &img_data->bits_per_pixel, &img_data->size_line, &img_data->endian);
-	printf("bits_per_pixel: %d\n", img_data->bits_per_pixel);
 	return (img_data);
 }
 
@@ -83,7 +82,6 @@ void	display_3d_map(t_game *game)
 		tmpangle += M_PI/2/SCREEN_WIDTH;
 		rayX = game->x;
 		rayY = game->y;
-		printf("rayX: %f\n", rayX);
 		while (game->display->map[(int)(rayY/MAP_SIZE)][(int)(rayX/MAP_SIZE)] && game->display->map[(int)(rayY/MAP_SIZE)][(int)(rayX/MAP_SIZE)] == '0')
 		{	
 			rayX += (game->rayDirX/5);
@@ -130,7 +128,6 @@ void	display_3d_map(t_game *game)
 		i++;
 		l++;
 	}
-	printf("l: %f\n", l);
 }
 
 void	refresh_3d_screen(t_game *game)
