@@ -1,6 +1,5 @@
 
 #include "../../include/graphic.h"
-#include <math.h>
 
 // void	ray_3d_display()
 
@@ -54,7 +53,9 @@ void	display_3d_map(t_game *game)
 	double	k;
 	double	l;
 	double	rayX;
+	double	adjX;
 	double	rayY;
+	double	adjY;
 	long double	i;
 	long double	step = 1;
 	double		angle;
@@ -67,8 +68,8 @@ void	display_3d_map(t_game *game)
 	(void) rayX;
 	(void) rayY;
 	
-	i = -1;
 
+	i = -SCREEN_WIDTH/2;
 	step /= SCREEN_WIDTH;
 	step *= 2;
 	angle = M_PI/2/(2/step);
@@ -76,26 +77,28 @@ void	display_3d_map(t_game *game)
 	game->rayDirX = game->dirX;
 	game->rayDirY = game->dirY;
 	l = 0;
+	double tmpangle = -M_PI/4;
 	rotate_matrix(&game->rayDirX, &game->rayDirY, -1 / step * (angle));
-	while (i <= 1)
+	while (tmpangle < M_PI/4)
 	{
 		j = 0;
-		rayX = game->x;
-		rayY = game->y;
-		while (game->display->map[(int)(rayY / MAP_SIZE)][(int)(rayX / MAP_SIZE)] == '0')
-		{
+		tmpangle += M_PI/2/SCREEN_WIDTH;
+		rayX = game->x / MAP_SIZE;
+		rayY = game->y / MAP_SIZE;
+		while (game->display->map[(int)(rayY)][(int)(rayX)] && game->display->map[(int)(rayY)][(int)(rayX)] == '0')
+		{	
 			rayX += (game->rayDirX);
 			rayY += (game->rayDirY);
-			*(unsigned int *)(game->img->data + (int) ((int) rayY * game->img->size_line + (int) rayX * (game->img->bits_per_pixel / 8))) = 0xFFFFFFFF;
+			*(unsigned int *)(game->img->data + (int) ((int) rayY * MAP_SIZE * game->img->size_line + (int) rayX  * MAP_SIZE * (game->img->bits_per_pixel / 8))) = 0xFFFFFFFF;
 			if (i >= 0 - (step+step) && i <= 0 + (step+step))
-				*(unsigned int *)(game->img->data + (int) ((int) rayY * game->img->size_line + (int) rayX * (game->img->bits_per_pixel / 8))) = 0x00FF0000;
+				*(unsigned int *)(game->img->data + (int) ((int) rayY * MAP_SIZE * game->img->size_line + (int) rayX  * MAP_SIZE * (game->img->bits_per_pixel / 8))) = 0x00FF0000;
 			// j += 1;
 		}
-		j = get_distance(game, rayX, rayY);
-		
+				j = get_distance(game, rayX, rayY);
+
 		long double distanceX;
 		long double distanceY;
-	
+		
 		if (rayX > (double) game->x)
 			distanceX = rayX - (double) game->x;
 		else
@@ -121,13 +124,15 @@ void	display_3d_map(t_game *game)
 				*(unsigned int *)(game->img->data + (int) ((SCREEN_HEIGHT/2-k-game->crouch) * game->img->size_line + (l) * (game->img->bits_per_pixel / 8))) = 0x00FF0000;
 		}
 		rotate_matrix(&game->rayDirX, &game->rayDirY, angle);
-		l++;
+		rotate_matrix(&planeX, &planeY, angle);
 		if (i < 0)
 			total_angle -= angle;
 		else if (i > 0)
 			total_angle += angle;
-		i += step;
+		i++;
+		l++;
 	}
+	printf("l: %f\n", l);
 }
 
 void	refresh_3d_screen(t_game *game)
