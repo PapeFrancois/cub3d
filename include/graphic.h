@@ -2,10 +2,10 @@
 # define GRAPHIC_H
 # include "cub3d.h"
 # include "../minilibx-linux/mlx.h"
-# include "../utils/libft/libft.h"
+# include "../utils/blibft/printb.h"
 # include <math.h>
 # include "image.h"
-# define MAP_SIZE 15
+# define MAP_SIZE 16
 # define SCREEN_WIDTH 1920
 # define SCREEN_HEIGHT 1080
 

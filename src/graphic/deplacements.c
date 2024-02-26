@@ -10,16 +10,16 @@ void	move(double step, t_game *game)
 		return ;
 	oldX = game->x;
 	oldY = game->y;
-	step /= 10;
+	step /= 5;
 	game->x += game->dirX * step;
 	game->y += game->dirY * step;
-	if (game->display->map[(int)(game->x / MAP_SIZE)][(int)(oldY / MAP_SIZE)] == '1')
-	{
-		game->x = oldX;
-	}
-	else if (game->display->map[(int)(oldX / MAP_SIZE)][(int)(game->y / MAP_SIZE)] == '1')
+	if (game->display->map[(int)(game->y / MAP_SIZE)][(int)(oldX / MAP_SIZE)] == '1')
 	{
 		game->y = oldY;
+	}
+	else if (game->display->map[(int)(oldY / MAP_SIZE)][(int)(game->x / MAP_SIZE)] == '1')
+	{
+		game->x = oldX;
 	}
 	refresh_screen(game);
 }

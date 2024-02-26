@@ -36,7 +36,7 @@ int	key_hook(int keycode, t_game *game)
 	if (keycode == 65307)
 		destroy_mlx(game->display);
 	else if (keycode == 119) //w
-		game->walking = 1;
+		game->walking = 3;
 		// move(0, speed, game);
 	else if (keycode == 97)  //a
 		game->rotate = -1;
@@ -55,27 +55,26 @@ int	key_hook(int keycode, t_game *game)
 char	**create_map()
 {
 	char	**map;
+	char	*line;
 	
+	line = NULL;
 	map = ft_calloc(MAP_SIZE + 10, sizeof(char *));
 	if (!map)
 		return (NULL);
-	for (int i = 0; i < MAP_SIZE; i++)
+	int fd = open("map/empty_map.cub", O_RDONLY);
+	line = get_next_line(fd);
+	int i = 0;
+	while (line)
 	{
-		map[i] = ft_calloc(MAP_SIZE + 10, sizeof(char));
-		if (!map[i])
-			return (free_2d_char(map), NULL);
-		for (int j = 0; j < MAP_SIZE; j++)
-		{
-			if (i == 0 || j == 0 || i == MAP_SIZE - 1 || j == MAP_SIZE - 1)
-				map[i][j] = '1';
-			else
-				map[i][j] = '0';
-			printf("%c", map[i][j]);
-		}
-		printf("\n");
+		map[i] = ft_strdup(line);
+		i++;
+		line = get_next_line(fd);
 	}
-	map[4][6] = '1';
-	map[8][3] = '1';
+
+	for (int i = 0; map[i]; i++)
+	{
+		printf("eqw%s\n", map[i]);
+	}
 	return (map);
 }
 
@@ -86,6 +85,8 @@ t_mlx	init_mlx()
 	display.mlx = mlx_init();
 	display.win = mlx_new_window(display.mlx, SCREEN_WIDTH, SCREEN_HEIGHT, "covi3d");
 	display.map = create_map();
+	for (int i = 0; display.map[i]; i++)
+		printf("asd%s\n", display.map[i]);
 
 	return (display);
 }
@@ -144,8 +145,8 @@ void	display()
 	// init_images(&display);
 	if (game.display_mode == 3)
 		init_images(game.display);
-	for (int i = 0; display.map[i]; i++)
-		printf("%s\n", display.map[i]);
+	// for (int i = 0; display.map[i]; i++)
+	// 	printf("%s\n", display.map[i]);
 	refresh_screen(&game);
 	mlx_loop_hook(display.mlx, key_loop_hook, &game);
 	mlx_hook(display.win, 17, 1L << 17, destroy_mlx, &game);

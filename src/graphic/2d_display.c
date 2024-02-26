@@ -13,7 +13,7 @@ static void draw_2d_player(t_game *game)
 	}
 }
 
-static void	draw_2d_map(t_game *game)
+ static void	draw_2d_map(t_game *game)
 {
 	int		i;
 	int		j;
@@ -21,14 +21,14 @@ static void	draw_2d_map(t_game *game)
 	int		l;
 	int		size;
 
-	i = 0;
 	size = MAP_SIZE;
+	i = 0;
 	while (game->display->map[i])
 	{
 		j = 0;
 		while (game->display->map[i][j])
 		{
-			if (game->display->map[j][i] == '1')
+			if (game->display->map[i][j] == '1')
 			{
 				k = 0;
 				while (k < size)
@@ -43,12 +43,12 @@ static void	draw_2d_map(t_game *game)
 					k++;
 				}
 			}
-			j++;
+		j++;
 		}
-		i++;
+			i++;
 	}
 
-}
+} 
 
 double cast_middle_ray(t_game *game)
 {
@@ -64,36 +64,6 @@ double cast_middle_ray(t_game *game)
 		// printf("rayX: %f, rayY: %f\n", rayX, rayY);
 	}
 	return (size);
-}
-
-t_img	*create_2d_minimap(t_game *game)
-{
-	t_img *img_data = ft_calloc(1, sizeof(t_img));
-	img_data->width = 64;
-	img_data->height = 64;
-	img_data->img = mlx_new_image(game->display->mlx, img_data->height, img_data->width);
-	if (img_data->img == NULL)
-	{
-		printf("Error\n");
-		exit(1);
-	}
-	img_data->bits_per_pixel = 0;
-	img_data->size_line = 0;
-	img_data->endian = 0;
-	img_data->data = (char *) mlx_get_data_addr(img_data->img, &img_data->bits_per_pixel, &img_data->size_line, &img_data->endian);
-
-	for (int i = 0; i < 64; i++)
-	{
-		for (int j = 0; j < 64; j++)
-		{
-			if (i == 0 || j == 0 || i == 63 || j == 63)
-				*(unsigned int *)(img_data->data + (i * img_data->size_line + j * (img_data->bits_per_pixel / 8))) = 0x00FF0000;
-			// else
-			// 	*(unsigned int *)(img_data->data + (i * img_data->size_line + j * (img_data->bits_per_pixel / 8))) = 0x0000FF00;
-		}
-	}
-	// mlx_put_image_to_window(game->display->mlx, game->display->win, img_data->img, 0, 0);
-	return (img_data);
 }
 
 int	create_trgb(int t, int r, int g, int b)
