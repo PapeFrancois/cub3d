@@ -50,22 +50,6 @@ static void draw_2d_player(t_game *game)
 
 } 
 
-// double cast_middle_ray(t_game *game)
-// {
-// 	double rayX = game->x;
-// 	double rayY = game->y;
-// 	int	size = 0;
-// 	while (game->display->map[(int)(rayX / MAP_SIZE)][(int)(rayY / MAP_SIZE)] == '0')
-// 	{
-// 		size += 1;
-// 		rayX += game->dirX;
-// 		rayY += game->dirY;
-// 		// mlx_pixel_put(game->display->mlx, game->display->win, rayX, rayY, 0x00FF0000);
-// 		// printf("rayX: %f, rayY: %f\n", rayX, rayY);
-// 	}
-// 	return (size);
-// }
-
 int	create_trgb(int t, int r, int g, int b)
 {
 	return (t << 24 | r << 16 | g << 8 | b);
